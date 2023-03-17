@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/white"
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="0dp"
+        android:background="#FDFFFFFF"
+        android:id="@+id/toolbar"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            >
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lyka "
+                android:textSize="25dp"
+                android:id="@+id/Lyyka"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+
+
+                />
+
+            <ImageView
+                android:id="@+id/newposticon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="75dp"
+                android:layout_toLeftOf="@+id/chaticon"
+                android:src="@drawable/addnewpost"
+
+
+                />
+            <ImageView
+                android:id="@+id/chaticon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+android:layout_alignParentEnd="true"
+                android:layout_marginRight="25dp"
+                android:src="@drawable/newchaticon"
+
+
+                />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+android:id="@+id/fragment_contnair"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/bottom_navigation"
+        />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+ app:itemTextColor="@color/purple_200"
+        app:itemIconTint="@color/black"
+
+        app:menu="@menu/bottomnavigationmenu" />
+
+
+
+</RelativeLayout>

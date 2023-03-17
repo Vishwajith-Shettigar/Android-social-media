@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+
+    android:id="@+id/homemenu"
+android:title="Home"
+    android:enabled="true"
+    android:iconTint="@color/black"
+    android:icon="@drawable/homeicon_unfilled"
+
+
+   />
+
+    <item
+android:iconTint="@color/black"
+        android:id="@+id/searchmenu"
+        android:title="search"
+        android:enabled="true"
+        android:icon="@drawable/search"
+
+        />
+
+    <item
+
+        android:id="@+id/favouritemenu"
+        android:title="favourite"
+        android:enabled="true"
+        android:icon="@drawable/favourite_unfilled"
+android:iconTint="@color/black"
+
+        
+        />
+
+
+    <item
+
+        android:id="@+id/accountmenu"
+        android:title="Account"
+        android:enabled="true"
+android:iconTint="@color/black"
+
+        android:icon="@drawable/account_unfilled"
+
+
+        />
+
+</menu>
