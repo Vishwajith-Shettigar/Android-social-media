@@ -1,18 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Profilefragment"
 
     >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textSize="100dp"
-        android:textColor="@color/black"
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="0dp"
+        android:background="#FDFFFFFF"
+        android:id="@+id/toolbarprofile"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            >
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vishwajit_shettigar "
+                android:textSize="20dp"
+                android:id="@+id/usernameprofile"
+                android:fontFamily="serif-monospace"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+
+
+                />
+
+            <ImageView
+                android:id="@+id/profilenewposticon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="75dp"
+                android:layout_toLeftOf="@+id/profilechaticon"
+                android:src="@drawable/addnewpost"
+
+
+                />
+            <ImageView
+                android:id="@+id/profilechaticon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="25dp"
+                android:src="@drawable/newchaticon"
+
+
+                />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+<RelativeLayout
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/profilesection"
+    android:layout_below="@+id/toolbarprofile"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/dpsec"
+
+    >
+<androidx.cardview.widget.CardView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   app:cardCornerRadius="90dp"
+android:id="@+id/cardprofiledp"
+    android:layout_centerVertical="true"
+    >
+
+<ImageView
+    android:layout_width="90dp"
+    android:layout_height="90dp"
+
+    android:src="@drawable/ic_launcher_foreground"
+    android:background="@drawable/ic_launcher_background"
+
+android:scaleType="centerCrop"
+
+    />
+
+
+</androidx.cardview.widget.CardView>
+    
+    <RelativeLayout
+        android:id="@+id/postnumberdetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_centerVertical="true"
+android:layout_marginLeft="30dp"
+android:layout_toRightOf="@id/cardprofiledp"
+        >
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/postnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="3dp"
+            android:layout_centerHorizontal="true"
+
+            />
+        <TextView
+            android:id="@+id/posttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Posts"
+            android:textColor="#514D4D"
+android:layout_below="@+id/postnumber"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/followersdetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/postnumberdetails"
+        >
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:id="@+id/followeesno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="110k"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="3dp"
+
+            />
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/followerstext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Followers"
+            android:textColor="#514D4D"
+            android:layout_below="@+id/followeesno"
+            />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/followingdetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+
+        android:layout_toRightOf="@id/followersdetails"
+        >
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:id="@+id/followingno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="410"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="3dp"
+
+            />
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/followingtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Following"
+            android:textColor="#514D4D"
+            android:layout_below="@+id/followingno"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
+
+    <RelativeLayout
+
+        android:id="@+id/profiledescription"
+        android:layout_below="@+id/dpsec"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/profilesecnamefullname"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dark Dronzer"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/black"
+
+
+            />
+        <TextView
+            android:id="@+id/profilebio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+android:layout_below="@id/profilesecnamefullname"
+android:layout_marginTop="10dp"
+            android:textColor="#514D4D"
+            android:text="Android | MERN
+            \nDepressed Kid
+"
+            />
+
+
+
+    </RelativeLayout>
+
+<RelativeLayout
+    android:id="@+id/editfollowmessagedetails"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/profiledescription"
+    android:layout_margin="10dp"
+
+    >
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/followbtn"
+        android:layout_width="100dp"
+
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+
+        android:backgroundTint="#C7BDBD"
+        android:text="Follow"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:textColor="@color/black" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/editbtn"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginStart="10dp"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+
+
+        android:layout_marginBottom="10dp"
+        android:text="Edit profile"
+        android:backgroundTint="#3F3C3C"
+
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/messagebtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+android:visibility="gone"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+android:backgroundTint="@color/purple_200"
+
+        android:layout_marginBottom="10dp"
+        android:text="Message"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:layout_below="@id/editfollowmessagedetails"
+        android:background="#767272"
+        />
+</RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/postsection"
+        android:layout_below="@id/profilesection"
+        >
 
-</FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+android:padding="5dp"
+            android:id="@+id/profilepostrecyclerview"
+            />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

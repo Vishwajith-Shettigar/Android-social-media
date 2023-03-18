@@ -12,6 +12,15 @@
         android:theme="@style/Theme.LykaSocialMediaJava"
         tools:targetApi="31">
         <activity
+            android:name=".Followingactivity"
+            android:exported="false" />
+        <activity
+            android:name=".Followersactivity"
+            android:exported="false" />
+        <activity
+            android:name=".Innersearchactivity"
+            android:exported="false" />
+        <activity
             android:name=".Commentactivity"
             android:exported="false" />
         <activity

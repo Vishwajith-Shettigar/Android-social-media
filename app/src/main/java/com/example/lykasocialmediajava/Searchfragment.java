@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 /**
@@ -17,7 +18,7 @@ import android.widget.ImageView;
  */
 public class Searchfragment extends Fragment {
     ImageView chaticon,newposticon;
-
+EditText search;
 
 
     @Override
@@ -26,6 +27,7 @@ public class Searchfragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_searchfragment, container, false);
 
+        search=view.findViewById(R.id.search);
         chaticon=view.findViewById(R.id.chaticon);
         newposticon=view.findViewById(R.id.newposticon);
         newposticon.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +42,16 @@ public class Searchfragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),Chatactivity.class));
+            }
+        });
+
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),Innersearchactivity.class));
+
+
             }
         });
 

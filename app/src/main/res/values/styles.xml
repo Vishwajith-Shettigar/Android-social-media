@@ -10,5 +10,7 @@
         <!-- Icon Color -->
         <item name="android:tint">@color/black</item>
     </style>
-
+    <style name="toolbarsearch" parent="@style/Base.TextAppearance.AppCompat.Title">
+        <item name="android:textSize">30sp</item>
+    </style>
 </resources>

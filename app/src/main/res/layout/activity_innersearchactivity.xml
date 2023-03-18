@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Innersearchactivity"
+    android:padding="20dp"
+    android:background="@color/white"
+    >
+<androidx.appcompat.widget.Toolbar
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+android:id="@+id/innersraecgtoolbar"
+    app:title="Lyka"
+    app:titleTextAppearance="@style/toolbarsearch"
+    app:titleTextColor="@color/black"
+
+    >
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/innersearch"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/searchback"
+        android:hint="search a name"
+  android:layout_gravity="end"
+app:queryHint="Search a username"
+
+        />
+
+</androidx.appcompat.widget.Toolbar>
+
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:padding="5dp"
+android:id="@+id/searchinnerrecycler"
+    android:layout_below="@+id/innersraecgtoolbar"
+    />
+</RelativeLayout>

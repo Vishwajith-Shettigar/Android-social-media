@@ -76,6 +76,7 @@
 
 
 <ImageView
+
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:src="@drawable/search"
@@ -84,7 +85,7 @@
 
 />
      <EditText
-
+android:id="@+id/search"
          android:layout_width="wrap_content"
          android:layout_height="50dp"
        android:hint="Search a username"
@@ -92,7 +93,7 @@
 android:textColor="@color/black"
          android:textColorHint="#8B8585"
 android:textAlignment="center"
-
+android:editable="false"
          android:layout_marginRight="30dp"
          android:layout_marginTop="10dp"
 
