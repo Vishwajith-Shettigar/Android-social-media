@@ -28,8 +28,7 @@ ImageView chaticon,newposticon;
         setContentView(R.layout.activity_main);
 // initializing
         bottomNavigationView=findViewById(R.id.bottom_navigation);
-chaticon=findViewById(R.id.chaticon);
-newposticon=findViewById(R.id.newposticon);
+
 
         // setting default fragment homfragment
         FragmentManager fragmentManager =
@@ -125,22 +124,8 @@ break;
 
 
 
-        // add new post buttn call back
-
-        newposticon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-startActivity(new Intent(MainActivity.this,Newpostactivity.class));
-            }
-        });
 
 
-        chaticon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Chatactivity.class));
-            }
-        });
 
     }
 }

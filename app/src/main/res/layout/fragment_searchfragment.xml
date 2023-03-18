@@ -1,17 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".Searchfragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".Searchfragment"
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="40dp"
 
-        android:text="search fragment" />
+    >
 
-</FrameLayout>
+     <androidx.appcompat.widget.Toolbar
+         android:layout_width="match_parent"
+         android:layout_height="?attr/actionBarSize"
+         android:layout_marginTop="0dp"
+         android:background="#FDFFFFFF"
+         android:id="@+id/toolbarsearch"
+
+         >
+
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_vertical"
+              >
+               <TextView
+
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Lyka "
+                   android:textSize="25dp"
+                   android:id="@+id/Lyyka"
+                   android:fontFamily="serif-monospace"
+                   android:textStyle="bold"
+                   android:textColor="@color/black"
+
+
+                   />
+
+               <ImageView
+                   android:id="@+id/newposticon"
+                   android:layout_width="25dp"
+                   android:layout_height="25dp"
+                   android:layout_alignParentEnd="true"
+                   android:layout_marginRight="75dp"
+                   android:layout_toLeftOf="@+id/chaticon"
+                   android:src="@drawable/addnewpost"
+
+
+                   />
+               <ImageView
+                   android:id="@+id/chaticon"
+                   android:layout_width="25dp"
+                   android:layout_height="25dp"
+                   android:layout_alignParentEnd="true"
+                   android:layout_marginRight="25dp"
+                   android:src="@drawable/newchaticon"
+
+
+                   />
+          </RelativeLayout>
+
+     </androidx.appcompat.widget.Toolbar>
+
+<LinearLayout
+    android:layout_below="@+id/toolbarsearch"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:id="@+id/linearserch"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="5dp"
+    >
+
+
+
+<ImageView
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:src="@drawable/search"
+    android:layout_marginTop="10dp"
+    android:padding="10dp"
+
+/>
+     <EditText
+
+         android:layout_width="wrap_content"
+         android:layout_height="50dp"
+       android:hint="Search a username"
+         android:background="@drawable/searchbarback"
+android:textColor="@color/black"
+         android:textColorHint="#8B8585"
+android:textAlignment="center"
+
+         android:layout_marginRight="30dp"
+         android:layout_marginTop="10dp"
+
+         />
+
+</LinearLayout>
+     <RelativeLayout
+         android:id="@+id/searchline"
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+android:background="#6B6969"
+         android:layout_margin="10dp"
+         android:layout_below="@id/linearserch"
+          />
+
+
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:id="@+id/searchrecyclerview"
+    android:padding="5dp"
+    android:layout_below="@+id/searchline"
+
+
+     />
+</RelativeLayout>

@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Favouritefragment">
+    android:background="@color/white"
+    tools:context=".Explorefragment">
+
+
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="0dp"
-        android:id="@+id/toolbarfavourite"
+        android:id="@+id/exploretolbar"
 
         >
 
@@ -30,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="Notification"
+                android:text="Explore"
                 android:textSize="25dp"
                 android:textColor="@color/black"
 
@@ -38,14 +41,14 @@
                 android:layout_toRightOf="@+id/explorebacjbtn"
                 />
         </RelativeLayout>
+
     </androidx.appcompat.widget.Toolbar>
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/explorerecyclerview"
+    android:layout_below="@+id/exploretolbar"
+    android:padding="5dp"
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-android:id="@+id/favouriterecyclerview"
-       android:padding="5dp"
-       android:layout_below="@+id/toolbarfavourite"
-       />
-
+    />
 </RelativeLayout>

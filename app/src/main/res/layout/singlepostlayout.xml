@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:id="@+id/toppostsec"
+
+
+
+    >
+
+<androidx.cardview.widget.CardView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:layout_marginLeft="15dp"
+    app:cardCornerRadius="45dp"
+    android:id="@+id/cardviewdp"
+ android:layout_centerVertical="true"
+    android:layout_marginRight="15dp"
+    >
+<ImageView
+    android:layout_width="45dp"
+    android:layout_height="45dp"
+    android:src="@drawable/ic_launcher_foreground"
+    android:background="@drawable/ic_launcher_background"
+android:scaleType="centerCrop"
+   />
+
+
+
+</androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:layout_marginRight="10dp"
+        android:id="@+id/postusername"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vishwajith shettigar"
+        android:layout_toRightOf="@id/cardviewdp"
+
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:src="@drawable/threedot"
+android:layout_marginLeft="-40dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/postusername"
+
+        />
+</RelativeLayout>
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:src="@drawable/ic_launcher_foreground"
+    android:background="@drawable/ic_launcher_background"
+android:scaleType="centerCrop"
+
+
+/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+<ImageView
+    android:id="@+id/likebtn"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+
+android:src="@drawable/favourite_unfilled"
+android:layout_centerVertical="true"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    />
+
+        <ImageView
+            android:id="@+id/commentbtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+android:src="@drawable/commneticon"
+            android:layout_centerVertical="true"
+android:layout_toRightOf="@id/likebtn"
+            />
+    </RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="7dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:textColor="#7D7D7D"
+android:text="hii in am android what about you and how do you do today.
+
+fine lets talk tomorrow"
+
+        />
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+android:background="#7C7979"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+</LinearLayout>
+
+</RelativeLayout>

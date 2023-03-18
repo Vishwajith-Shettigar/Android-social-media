@@ -2,13 +2,67 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     >
+  <androidx.appcompat.widget.Toolbar
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:layout_marginTop="0dp"
+      android:background="#FDFFFFFF"
+      android:id="@+id/toolbarhome"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello home"
-        android:textSize="40dp"/>
+      >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        >
+      <TextView
+
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Lyka "
+          android:textSize="25dp"
+          android:id="@+id/Lyyka"
+          android:fontFamily="serif-monospace"
+          android:textStyle="bold"
+          android:textColor="@color/black"
+
+
+          />
+
+      <ImageView
+          android:id="@+id/newposticon"
+          android:layout_width="25dp"
+          android:layout_height="25dp"
+          android:layout_alignParentEnd="true"
+          android:layout_marginRight="75dp"
+          android:layout_toLeftOf="@+id/chaticon"
+          android:src="@drawable/addnewpost"
+
+
+          />
+      <ImageView
+          android:id="@+id/chaticon"
+          android:layout_width="25dp"
+          android:layout_height="25dp"
+          android:layout_alignParentEnd="true"
+          android:layout_marginRight="25dp"
+          android:src="@drawable/newchaticon"
+
+
+          />
+    </RelativeLayout>
+
+  </androidx.appcompat.widget.Toolbar>
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+android:padding="5dp"
+      android:layout_below="@id/toolbarhome"
+android:id="@+id/homefragmentrecyclerview"
+      />
 
 </RelativeLayout>
