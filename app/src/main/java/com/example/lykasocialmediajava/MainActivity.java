@@ -15,19 +15,34 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
 
-ImageView chaticon,newposticon;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 // initializing
         bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseFirestore=FirebaseFirestore.getInstance();
 
 
         // setting default fragment homfragment
@@ -125,6 +140,89 @@ break;
 
 
 
+        // setting usermodel
+        if(firebaseAuth.getCurrentUser()!=null)
+        {
+
+            DocumentReference documentReference=firebaseFirestore.collection("users").document(firebaseAuth.getUid());
+
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                    if(task.isSuccessful())
+                    {
+
+                        DocumentSnapshot documentSnapshot=task.getResult();
+                        Map<String, Object> details=documentSnapshot.getData();
+                       Log.e("*",details.get("email").toString());
+
+                       Usermodel.setUserID(details.get("userID").toString());
+                        Usermodel.setUsername(details.get("username").toString());
+                        Usermodel.setName(details.get("name").toString());
+
+                        if(details.get("imageurl")!=null){
+                            Log.e("*","hii");
+                            Usermodel.setImageurl(details.get("imageurl").toString());
+                        }
+                        if(details.get("description")!=null) {
+                            Usermodel.setDesc(details.get("description").toString());
+                        }
+
+
+
+
+
+                    }
+                }
+            });
+        }
+
+
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(firebaseAuth.getCurrentUser()!=null)
+        {
+
+            DocumentReference documentReference=firebaseFirestore.collection("users").document(firebaseAuth.getUid());
+
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                    if(task.isSuccessful())
+                    {
+
+                        DocumentSnapshot documentSnapshot=task.getResult();
+                        Map<String, Object> details=documentSnapshot.getData();
+                        Log.e("*",details.get("email").toString());
+
+                        Usermodel.setUserID(details.get("userID").toString());
+                        Usermodel.setUsername(details.get("username").toString());
+                        Usermodel.setName(details.get("name").toString());
+
+                        if(details.get("imageurl")!=null){
+                            Log.e("*","hii");
+                            Usermodel.setImageurl(details.get("imageurl").toString());
+                        }
+                        if(details.get("description")!=null) {
+                            Usermodel.setDesc(details.get("description").toString());
+                        }
+
+
+
+
+
+                    }
+                }
+            });
+        }
 
 
     }

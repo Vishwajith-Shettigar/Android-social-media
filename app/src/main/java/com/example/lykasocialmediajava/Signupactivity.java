@@ -145,7 +145,12 @@ if(password.length()<=5)
                                         details.put("username",username);
                                         details.put("email",email);
                                         details.put("password",password);
-                                            collectionReference.document("user").set(details);
+                                        details.put("imageurl",null);
+                                        details.put("description",null);
+                                        details.put("name",username);
+
+
+                                            collectionReference.document(firebaseAuth.getUid()).set(details);
 
 
 

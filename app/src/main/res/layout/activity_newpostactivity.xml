@@ -4,13 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Newpostactivity">
+    tools:context=".Newpostactivity"
+    android:background="@color/white"
+    >
 
-    <TextView
+
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New post"
-        android:textSize="40dp"
-        android:textColor="@color/black"
-/>
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+        android:id="@+id/newpostfragtoolbar"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:id="@+id/newpostfragbackbtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back"
+                android:layout_centerVertical="true"
+
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="New post"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/newpostfragbackbtn"
+                />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+    android:layout_below="@+id/newpostfragtoolbar"
+
+
+
+        >
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+android:src="@drawable/baseline_video_file_24"
+android:id="@+id/newpostimage"
+            android:padding="120dp"
+
+
+            />
+
+        <VideoView
+            android:id="@+id/newpostvideo"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+android:visibility="gone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+android:padding="20dp"
+            android:hint="Write text here"
+            android:layout_below="@+id/newpostimage"
+android:textColor="@color/black"
+          android:id="@+id/newposttext"
+            android:textColorHint="#868181"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+android:text="post"
+            android:id="@+id/newpostsendbtn"
+android:layout_below="@+id/newposttext"
+            android:layout_centerInParent="true"
+android:layout_marginTop="20dp"
+            />
+    </RelativeLayout>
+
+
 </RelativeLayout>
