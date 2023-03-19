@@ -12,6 +12,15 @@
         android:theme="@style/Theme.LykaSocialMediaJava"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Signinactivity"
+            android:exported="false" />
+        <activity
+            android:name=".Signupactivity"
+            android:exported="false" />
+        <activity
             android:name=".Followingactivity"
             android:exported="false" />
         <activity
@@ -30,7 +39,7 @@
             android:name=".Newpostactivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
