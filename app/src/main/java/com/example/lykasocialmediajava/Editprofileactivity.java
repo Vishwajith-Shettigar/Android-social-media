@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.common.net.InternetDomainName;
+import com.google.firebase.StartupTime;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -40,7 +42,7 @@ import java.util.Map;
 public class Editprofileactivity extends AppCompatActivity {
 
 String imageAccessToken;
-
+ProgressBar editprogressbar;
 FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
     ImageView imageView;
@@ -55,6 +57,8 @@ MaterialButton savebtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editprofileactivity);
+
+        editprogressbar=findViewById(R.id.editprogressbar);
 firebaseAuth=FirebaseAuth.getInstance();
         firebaseFirestore=FirebaseFirestore.getInstance();
 imageView=findViewById(R.id.editprofileimage);
@@ -102,7 +106,7 @@ imageView.setOnClickListener(new View.OnClickListener() {
                     Toast.makeText(Editprofileactivity.this, "Enter username", Toast.LENGTH_SHORT).show();
                 }
                 else{
-
+                    editprogressbar.setVisibility(View.VISIBLE);
                     Query usernameres = firebaseFirestore.collection("users").whereEqualTo("username", username.getText().toString());
 
                     usernameres.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -130,11 +134,12 @@ catch( Exception e)
 
                                 if ((task.getResult().size() ==1 ) && !firebaseAuth.getUid().toString().equals(doc.get("userID").toString())) {
                                       Log.e("*","uoppop");
-
+                                    editprogressbar.setVisibility(View.INVISIBLE);
                                     Toast.makeText(Editprofileactivity.this, "username is taken", Toast.LENGTH_SHORT).show();
 
                                 }
                                 else{
+
 
                                     sendImagetoStorage();
 
@@ -148,7 +153,10 @@ catch( Exception e)
 
                                     }
 
-//
+
+                                    editprogressbar.setVisibility(View.INVISIBLE);
+                                        startActivity(new Intent(Editprofileactivity.this, MainActivity.class));
+                                        finish();
 
                                 }
 
