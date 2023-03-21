@@ -1,12 +1,15 @@
 package com.example.lykasocialmediajava.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,10 +56,37 @@ public class PostAdapter extends RecyclerView.Adapter {
         Log.e("*",postModel.getUsername()+" adapter");
        ( (viewholder)holder).username.setText(postModel.getUsername());
 
-        Picasso.get().load(postModel.getPimage()).into( ( (viewholder)holder).postimage);
-        Log.e("*","n bind");
-     (   (viewholder)holder).posttext.setText(postModel.getPtext());
 
+       if((postModel.getPimage().equals("null"))) {
+           ((viewholder) holder).postimage.setVisibility(View.GONE);
+           ((viewholder) holder).postvideo.setVisibility(View.GONE);
+
+       }else{
+
+           if(postModel.getPimage().contains("mp4"))
+           {
+               MediaController mediaController = new MediaController(context);
+
+               ((viewholder) holder).postimage.setVisibility(View.GONE);
+               ((viewholder)holder).postvideo.setVideoURI(Uri.parse(postModel.getPimage()));
+               ((viewholder)holder).postvideo.setMediaController(mediaController);
+               ((viewholder)holder).postvideo.start();
+
+           }else {
+               ((viewholder) holder).postvideo.setVisibility(View.GONE);
+               Picasso.get().load(postModel.getPimage()).into(((viewholder) holder).postimage);
+
+           }
+
+       }
+
+    if(postModel.getPtext().equals("null"))
+    {
+        ((viewholder) holder).posttext.setVisibility(View.GONE);
+
+    }else {
+        ((viewholder) holder).posttext.setText(postModel.getPtext());
+    }
 
 
 
@@ -75,6 +105,7 @@ public class PostAdapter extends RecyclerView.Adapter {
         ImageView userdp,postimage,likebtn,commentbtn;
         TextView username,likecount,comcount,posttext;
         ImageView threedot;
+        VideoView postvideo;
 
 
         public viewholder(@NonNull View itemView) {
@@ -83,7 +114,7 @@ public class PostAdapter extends RecyclerView.Adapter {
             username=itemView.findViewById(R.id.postusername);
             threedot=itemView.findViewById(R.id.threedot);
             posttext=itemView.findViewById(R.id.posttext);
-
+            postvideo=itemView.findViewById(R.id.postvideo);
             postimage=itemView.findViewById(R.id.postimage);
             likebtn=itemView.findViewById(R.id.likebtn);
             commentbtn=itemView.findViewById(R.id.commentbtn);

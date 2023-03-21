@@ -65,17 +65,33 @@ android:layout_marginLeft="-40dp"
 
         />
 </RelativeLayout>
-
-<ImageView
-    android:id="@+id/postimage"
-    android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:src="@drawable/ic_launcher_foreground"
-    android:background="@drawable/ic_launcher_background"
-android:scaleType="centerCrop"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:layout_gravity="center"
+        android:gravity="center"
+        >
 
 
-/>
+
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:id="@+id/postvideo"
+
+            />
+        <ImageView
+            android:id="@+id/postimage"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:background="@drawable/ic_launcher_background"
+            android:scaleType="centerCrop"
+
+
+            />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"

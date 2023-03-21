@@ -202,8 +202,8 @@ else {
         details.put("userID",firebaseAuth.getUid());
 //        details.put("username",Usermodel.getUsername());
 //        details.put("userprofileimage",Usermodel.getImageurl());
-        details.put("postimage","");
-        details.put("posttext","");
+        details.put("postimage","null");
+        details.put("posttext","null");
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
 
