@@ -29,6 +29,7 @@ android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     >
 <ImageView
+    android:id="@+id/userdp"
     android:layout_width="45dp"
     android:layout_height="45dp"
     android:src="@drawable/ic_launcher_foreground"
@@ -42,6 +43,7 @@ android:scaleType="centerCrop"
 
 
     <TextView
+        android:textColor="@color/black"
         android:layout_marginRight="10dp"
         android:id="@+id/postusername"
         android:layout_centerVertical="true"
@@ -53,6 +55,7 @@ android:scaleType="centerCrop"
         />
 
     <ImageView
+        android:id="@+id/threedot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 android:src="@drawable/threedot"
@@ -64,6 +67,7 @@ android:layout_marginLeft="-40dp"
 </RelativeLayout>
 
 <ImageView
+    android:id="@+id/postimage"
     android:layout_width="match_parent"
     android:layout_height="400dp"
     android:src="@drawable/ic_launcher_foreground"
@@ -85,8 +89,23 @@ android:scaleType="centerCrop"
 android:src="@drawable/favourite_unfilled"
 android:layout_centerVertical="true"
     android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_marginRight="5dp"
     />
+        <TextView
+            android:id="@+id/likescount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/likebtn"
+
+android:text="1000"
+            android:textColor="@color/black"
+android:layout_marginRight="10dp"
+
+            />
+
+
 
         <ImageView
             android:id="@+id/commentbtn"
@@ -94,7 +113,21 @@ android:layout_centerVertical="true"
             android:layout_height="35dp"
 android:src="@drawable/commneticon"
             android:layout_centerVertical="true"
-android:layout_toRightOf="@id/likebtn"
+android:layout_toRightOf="@id/likescount"
+            android:layout_marginRight="5dp"
+            />
+        <TextView
+            android:id="@+id/comcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/commentbtn"
+
+            android:text="1000"
+            android:textColor="@color/black"
+            android:layout_marginRight="10dp"
+
             />
     </RelativeLayout>
 
@@ -105,6 +138,7 @@ android:layout_toRightOf="@id/likebtn"
     >
 
     <TextView
+        android:id="@+id/posttext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 android:textColor="#7D7D7D"

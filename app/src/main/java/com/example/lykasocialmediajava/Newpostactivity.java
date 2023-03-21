@@ -200,10 +200,10 @@ else {
         CollectionReference collectionReference = firebaseFirestore.collection("posts");
         Map<String,String > details=new HashMap<>();
         details.put("userID",firebaseAuth.getUid());
-        details.put("username",Usermodel.getUsername());
-        details.put("userprofileimage",Usermodel.getImageurl());
-        details.put("postimage",null);
-        details.put("posttext",null);
+//        details.put("username",Usermodel.getUsername());
+//        details.put("userprofileimage",Usermodel.getImageurl());
+        details.put("postimage","");
+        details.put("posttext","");
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
 
