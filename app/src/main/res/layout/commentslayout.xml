@@ -47,7 +47,8 @@
     android:layout_height="wrap_content"
 android:id="@+id/commentusername"
     android:text="vishwajit shettigar"
-    android:textStyle="bold"
+
+    android:textColor="@color/black"
 
     />
     <TextView

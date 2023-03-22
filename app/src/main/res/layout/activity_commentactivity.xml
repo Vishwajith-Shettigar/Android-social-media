@@ -42,45 +42,68 @@ android:layout_centerVertical="true"
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/commnetsrecyclerview"
-android:layout_below="@id/commnetstoolbar"
-    android:padding="5dp"
 
-    />
-    <RelativeLayout
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:id="@+id/commentrecycler"
+
+        android:padding="5dp"
+
+        android:layout_below="@+id/commnetstoolbar"
+
+android:layout_above="@+id/sendcard"
+
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-android:id="@+id/commnettextandbtrn"
-android:layout_alignParentBottom="true"
-        android:background="@color/black"
-        android:layout_below="@+id/commnetsrecyclerview"
->
+        android:layout_alignParentBottom="true"
+        android:id="@+id/sendcard"
+        android:layout_marginRight="-57dp"
+        app:cardCornerRadius="50dp"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
 
-        <EditText
-            android:id="@+id/commenttext"
-            android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_alignRight="@+id/comnttext">
 
+
+        <ImageView
+            android:id="@+id/sendbutn"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:hint="Enter your comment"
-            android:textColor="@color/black"
-            android:textColorHint="#787474"
+            android:src="@drawable/sendicon"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:layout_gravity="center"
+
 
             />
+    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/comnttext"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/messageback"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="4dp"
+        android:hint="Enter your comment"
+        android:textColor="@color/black"
+        android:textColorHint="#6F6C6C"
+        android:padding="5dp"
 
 
-<com.google.android.material.button.MaterialButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-android:id="@+id/cmtsendbtn"
 
-    android:text="send"
-    android:layout_toRightOf="@+id/commenttext"
 
-    />
-
-    </RelativeLayout>
+        />
 
 </RelativeLayout>

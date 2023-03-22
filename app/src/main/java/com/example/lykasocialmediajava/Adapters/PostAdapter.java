@@ -142,6 +142,8 @@ Log.e("*",postModel.getPimage());
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(context, Commentactivity.class);
+                intent.putExtra("postID",postModel.getPid());
+
                 context.startActivity(intent);
             }
         });

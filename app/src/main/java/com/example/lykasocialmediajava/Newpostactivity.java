@@ -234,18 +234,18 @@ String post_id= (firebaseAuth.getUid()+Math.random()+""+Math.random());
         //  do commnets
 
 
-        CollectionReference commnetcollectionReference = firebaseFirestore.collection("Comments");
-
-        Map<String,String > comdetails=new HashMap<>();
-        comdetails.put("userID",firebaseAuth.getUid());
-        comdetails.put("postID",post_id);
-
-
-comdetails.put("commenttext","lolol");
-
-
-
-        commnetcollectionReference.document(post_id).set(comdetails);
+//        CollectionReference commnetcollectionReference = firebaseFirestore.collection("Comments");
+//
+//        Map<String,String > comdetails=new HashMap<>();
+//        comdetails.put("userID",firebaseAuth.getUid());
+//        comdetails.put("postID",post_id);
+//
+//
+//comdetails.put("commenttext","lolol");
+//
+//
+//
+//        commnetcollectionReference.document(post_id).set(comdetails);
 
 
     }
