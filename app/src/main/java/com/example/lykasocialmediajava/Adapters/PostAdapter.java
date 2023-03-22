@@ -16,12 +16,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lykasocialmediajava.Model.PostModel;
 import com.example.lykasocialmediajava.R;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PostAdapter extends RecyclerView.Adapter {
     FirebaseAuth firebaseAuth;
@@ -68,11 +79,21 @@ public class PostAdapter extends RecyclerView.Adapter {
                MediaController mediaController = new MediaController(context);
 
                ((viewholder) holder).postimage.setVisibility(View.GONE);
-               ((viewholder)holder).postvideo.setVideoURI(Uri.parse(postModel.getPimage()));
-               ((viewholder)holder).postvideo.setMediaController(mediaController);
-               ((viewholder)holder).postvideo.start();
+
+               ExoPlayer player = new ExoPlayer.Builder(context).build();
+               ((viewholder)holder).postvideo.setPlayer(player);
+               MediaItem mediaItem = MediaItem.fromUri(Uri.parse(postModel.getPimage()));
+
+               player.addMediaItem(mediaItem);
+// Prepare exoplayer
+               player.prepare();
+// Play media when it is ready
+               player.setPlayWhenReady(true);
+
 
            }else {
+
+Log.e("*",postModel.getPimage());
                ((viewholder) holder).postvideo.setVisibility(View.GONE);
                Picasso.get().load(postModel.getPimage()).into(((viewholder) holder).postimage);
 
@@ -89,11 +110,77 @@ public class PostAdapter extends RecyclerView.Adapter {
     }
 
 
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        Query query=firebaseFirestore.collection("Likes").whereEqualTo("postID",postModel.getPid()).whereEqualTo("userID",firebaseAuth.getUid());
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    Log.e("*","likes"+task.getResult().size()+"");
+                    if(task.getResult().size()==1)
+                    {
+                        ((viewholder)holder). liked =true;
+                        setLikes(holder);
+                    }
+
+
+                }
+            }
+        });
+
+
+        // when user likes or dislikes
+
+        ((viewholder)holder).likebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(((viewholder)holder). liked ==true) {
+                    firebaseFirestore.collection("Likes").document(postModel.getPid()+""+firebaseAuth.getUid()).delete();
+                    ((viewholder)holder). liked =false;
+                    setLikes(holder);
+                }
+                else{
+
+                    CollectionReference likescollectionReference = firebaseFirestore.collection("Likes");
+
+                    Map<String,String > likesdetails=new HashMap<>();
+                    likesdetails.put("userID",firebaseAuth.getUid());
+                    likesdetails.put("postID",postModel.getPid());
+
+
+
+
+                    likescollectionReference.document(postModel.getPid()+""+firebaseAuth.getUid()).set(likesdetails);
+
+
+                    ((viewholder)holder). liked =true;
+                    setLikes(holder);
+
+
+                }
+            }
+        });
 
 
     }
 
+public  void setLikes(RecyclerView.ViewHolder holder)
+{
 
+    if(((viewholder)holder). liked ==true)
+    {
+        Log.e("*","ye bjai liked he 2");
+
+        ((viewholder)holder).likebtn.setImageResource(R.drawable.likedicon);
+    }
+    else{
+        ((viewholder)holder).likebtn.setImageResource(R.drawable.favourite_unfilled);
+
+    }
+
+}
     @Override
     public int getItemCount() {
         return Postarraylist.size();
@@ -105,9 +192,9 @@ public class PostAdapter extends RecyclerView.Adapter {
         ImageView userdp,postimage,likebtn,commentbtn;
         TextView username,likecount,comcount,posttext;
         ImageView threedot;
-        VideoView postvideo;
+        PlayerView postvideo;
 
-
+boolean liked;
         public viewholder(@NonNull View itemView) {
             super(itemView);
             userdp=itemView.findViewById(R.id.userdp);
@@ -120,6 +207,7 @@ public class PostAdapter extends RecyclerView.Adapter {
             commentbtn=itemView.findViewById(R.id.commentbtn);
             likecount=itemView.findViewById(R.id.likescount);
             comcount=itemView.findViewById(R.id.comcount);
+            liked=false;
 
 
         }

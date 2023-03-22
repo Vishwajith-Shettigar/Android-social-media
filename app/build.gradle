@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+
     namespace 'com.example.lykasocialmediajava'
     compileSdk 33
 
@@ -27,6 +28,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -43,5 +47,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+
     implementation 'com.squareup.picasso:picasso:2.8'
+    // dependency for exoplayer
+
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.0'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.0'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.18.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.0'
+
+
+
 }

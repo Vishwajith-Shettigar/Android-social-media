@@ -66,6 +66,7 @@ fetchPosts();
 //        postModelArrayList.add(postModel);
         Log.e("*", String.valueOf(postModelArrayList.size()));
         homefragmentrecyclerview.setHasFixedSize(true);
+
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         homefragmentrecyclerview.setLayoutManager(linearLayoutManager);
