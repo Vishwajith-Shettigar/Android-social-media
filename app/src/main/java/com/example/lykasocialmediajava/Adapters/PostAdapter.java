@@ -1,6 +1,7 @@
 package com.example.lykasocialmediajava.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lykasocialmediajava.Commentactivity;
 import com.example.lykasocialmediajava.Model.PostModel;
 import com.example.lykasocialmediajava.R;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -130,6 +132,22 @@ Log.e("*",postModel.getPimage());
         });
 
 
+        // set likes count
+
+        setLikescount(holder,postModel);
+
+// commnet btn click
+
+        ((viewholder)holder).commentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, Commentactivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+
+
         // when user likes or dislikes
 
         ((viewholder)holder).likebtn.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +157,7 @@ Log.e("*",postModel.getPimage());
                 if(((viewholder)holder). liked ==true) {
                     firebaseFirestore.collection("Likes").document(postModel.getPid()+""+firebaseAuth.getUid()).delete();
                     ((viewholder)holder). liked =false;
+                    ((viewholder)holder).nolikes=  (Integer.parseInt(((viewholder)holder).nolikes)-1)+"";
                     setLikes(holder);
                 }
                 else{
@@ -156,6 +175,7 @@ Log.e("*",postModel.getPimage());
 
 
                     ((viewholder)holder). liked =true;
+                    ((viewholder)holder).nolikes=  (Integer.parseInt(((viewholder)holder).nolikes)+1)+"";
                     setLikes(holder);
 
 
@@ -172,15 +192,40 @@ public  void setLikes(RecyclerView.ViewHolder holder)
     if(((viewholder)holder). liked ==true)
     {
         Log.e("*","ye bjai liked he 2");
+        ((viewholder)holder).likecount.setText(   ((viewholder)holder).nolikes);
 
         ((viewholder)holder).likebtn.setImageResource(R.drawable.likedicon);
     }
     else{
+        ((viewholder)holder).likecount.setText(   ((viewholder)holder).nolikes);
+
         ((viewholder)holder).likebtn.setImageResource(R.drawable.favourite_unfilled);
 
     }
 
 }
+public  void setLikescount(RecyclerView.ViewHolder holder,PostModel postModel)
+{
+    FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+    Query query=firebaseFirestore.collection("Likes").whereEqualTo("postID",postModel.getPid());
+    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            if(task.isSuccessful())
+            {
+                Log.e("*","likes"+task.getResult().size()+"");
+
+                ((viewholder)holder).nolikes=  task.getResult().size()+"";
+                ((viewholder)holder).likecount.setText(   ((viewholder)holder).nolikes);
+
+
+            }
+        }
+    });
+
+
+}
+
     @Override
     public int getItemCount() {
         return Postarraylist.size();
@@ -194,6 +239,7 @@ public  void setLikes(RecyclerView.ViewHolder holder)
         ImageView threedot;
         PlayerView postvideo;
 
+        String nolikes;
 boolean liked;
         public viewholder(@NonNull View itemView) {
             super(itemView);
@@ -208,7 +254,7 @@ boolean liked;
             likecount=itemView.findViewById(R.id.likescount);
             comcount=itemView.findViewById(R.id.comcount);
             liked=false;
-
+nolikes="";
 
         }
     }

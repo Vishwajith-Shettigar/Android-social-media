@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Commentactivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -49,4 +50,37 @@ android:layout_below="@id/commnetstoolbar"
     android:padding="5dp"
 
     />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:id="@+id/commnettextandbtrn"
+android:layout_alignParentBottom="true"
+        android:background="@color/black"
+        android:layout_below="@+id/commnetsrecyclerview"
+>
+
+        <EditText
+            android:id="@+id/commenttext"
+            android:layout_width="match_parent"
+
+            android:layout_height="50dp"
+            android:hint="Enter your comment"
+            android:textColor="@color/black"
+            android:textColorHint="#787474"
+
+            />
+
+
+<com.google.android.material.button.MaterialButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:id="@+id/cmtsendbtn"
+
+    android:text="send"
+    android:layout_toRightOf="@+id/commenttext"
+
+    />
+
+    </RelativeLayout>
+
 </RelativeLayout>
