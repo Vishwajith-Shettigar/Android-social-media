@@ -93,6 +93,9 @@ comdetails.put("comID",comid);
 
 
             commnetcollectionReference.document(comid).set(comdetails);
+
+            comtext.setText("");
+
             getComments();
             commentsAdapter.notifyDataSetChanged();
 

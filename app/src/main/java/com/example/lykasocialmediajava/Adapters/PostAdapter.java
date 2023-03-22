@@ -150,6 +150,25 @@ Log.e("*",postModel.getPimage());
 
 
 
+        //set commnets count
+
+
+        FirebaseFirestore firebaseFirestore1=FirebaseFirestore.getInstance();
+        Query query1=firebaseFirestore.collection("Comments").whereEqualTo("postID",postModel.getPid());
+        query1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    Log.e("*","commnets"+task.getResult().size()+"");
+                    ((viewholder)holder).comcount.setText(task.getResult().size()+"");
+
+
+                }
+            }
+        });
+
+
         // when user likes or dislikes
 
         ((viewholder)holder).likebtn.setOnClickListener(new View.OnClickListener() {
