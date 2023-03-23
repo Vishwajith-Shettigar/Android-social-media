@@ -10,14 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lykasocialmediajava.Commentactivity;
 import com.example.lykasocialmediajava.Likesactivity;
 import com.example.lykasocialmediajava.Model.PostModel;
+import com.example.lykasocialmediajava.Postmenubottomsheet;
 import com.example.lykasocialmediajava.R;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
@@ -30,8 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -256,6 +255,15 @@ public  void setLikescount(RecyclerView.ViewHolder holder,PostModel postModel)
 
 
             }
+        }
+    });
+
+    ((viewholder)(holder)).threedot.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Postmenubottomsheet postmenubottomsheet=new Postmenubottomsheet(postModel.getPid());
+            postmenubottomsheet.show(((AppCompatActivity)context).getSupportFragmentManager(), "lol");
+
         }
     });
 

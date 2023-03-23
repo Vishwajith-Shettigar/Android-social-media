@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/messageback"
+    android:orientation="vertical"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+android:layout_marginLeft="20dp"
+        android:id="@+id/bookmarkbtn"
+
+        >
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:src="@drawable/bookmarkicon"
+    android:id="@+id/bokicon"
+    android:layout_centerVertical="true"
+    android:layout_marginRight="10dp"
+    />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+android:layout_toRightOf="@+id/bokicon"
+            android:text="Bookmark"
+android:textColor="@color/black"
+            />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/editbtn"
+
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edit"
+            android:id="@+id/editicon"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/editicon"
+            android:text="Edit"
+            android:textColor="@color/black"
+            />
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/hidelikebtn"
+
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/favourite_unfilled"
+            android:id="@+id/likeiconhide"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/likeiconhide"
+            android:text="Hide like count"
+            android:textColor="@color/black"
+            />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/hidecomtbtn"
+
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/commneticon"
+            android:id="@+id/comthideicon"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/comthideicon"
+            android:text="Hide comments"
+            android:textColor="@color/black"
+            />
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/deletebtn"
+
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/deleteicon"
+            android:id="@+id/deleteicon"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/deleteicon"
+            android:text="Delete"
+
+            android:textColor="#FF0101"
+            />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
