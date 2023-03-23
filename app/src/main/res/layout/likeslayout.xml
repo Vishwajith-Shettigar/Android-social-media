@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:padding="6dp"
+
+    >
+    <RelativeLayout
+        android:layout_marginBottom="10dp"
+        android:id="@+id/relativelayoutofuserandtext"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:cardCornerRadius="45dp"
+            android:id="@+id/likescardview"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+
+            >
+            <ImageView
+                android:id="@+id/likesuserimage"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_launcher_foreground"
+                android:background="@drawable/ic_launcher_background"
+                android:scaleType="centerCrop"
+                />
+
+
+
+        </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/likescardview"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/likesusername"
+                android:text="vishwajit shettigar"
+
+                android:textColor="@color/black"
+
+                />
+            <TextView
+                android:id="@+id/likesname"
+                android:textSize="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/likesusername"
+                android:text="dark dronzer"
+
+                />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#797575"
+        android:layout_below="@+id/relativelayoutofuserandtext"
+        />
+</RelativeLayout>

@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lykasocialmediajava.Commentactivity;
+import com.example.lykasocialmediajava.Likesactivity;
 import com.example.lykasocialmediajava.Model.PostModel;
 import com.example.lykasocialmediajava.R;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -135,6 +136,20 @@ Log.e("*",postModel.getPimage());
         // set likes count
 
         setLikescount(holder,postModel);
+
+
+        // liked user details btn
+
+        ((viewholder)holder).likecount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, Likesactivity.class);
+                intent.putExtra("postID",postModel.getPid());
+
+                context.startActivity(intent);
+            }
+        });
+
 
 // commnet btn click
 
