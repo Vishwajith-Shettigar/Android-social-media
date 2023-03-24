@@ -11,7 +11,10 @@ public class PostModel {
     String ptext;
     String ttime;
 
-    public PostModel(String uid, String username, String userimage, String pid, String pimage, String ptext, String ttime) {
+    boolean hideLike;
+    boolean hideComt;
+
+    public PostModel(String uid, String username, String userimage, String pid, String pimage, String ptext, String ttime,boolean hideLike,boolean hideComt) {
         this.uid = uid;
         this.username = username;
         this.userimage = userimage;
@@ -19,6 +22,9 @@ public class PostModel {
         this.pimage = pimage;
         this.ptext = ptext;
         this.ttime = ttime;
+        this.hideLike=hideLike;
+        this.hideComt=hideComt;
+
     }
 
     public String getUid() {
@@ -75,5 +81,24 @@ public class PostModel {
 
     public void setTtime(String ttime) {
         this.ttime = ttime;
+    }
+
+
+    public void setHideComt(boolean hideComt) {
+        this.hideComt = hideComt;
+    }
+
+    public void setHideLike(boolean hideLike) {
+        this.hideLike = hideLike;
+    }
+
+    public  boolean gethideLike()
+    {
+        return hideLike;
+    }
+
+    public  boolean gethideComt()
+    {
+        return  hideComt;
     }
 }

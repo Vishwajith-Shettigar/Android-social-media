@@ -78,7 +78,7 @@ homefragmentrecyclerview.setAdapter(postAdapter);
         newposticon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),Newpostactivity.class));
+                startActivity(new Intent(getActivity(),Newpostactivity.class).putExtra("isEdit","false"));
             }
         });
 
@@ -135,11 +135,12 @@ QuerySnapshot querySnapshot=task.getResult();
 
 
                             Log.e("*",doc.get("posttext").toString() +" ininna");
-                            PostModel postModel=new PostModel(doc.get("userID").toString(),usernamelol,"https://firebasestorage.googleapis.com/v0/b/lykasocialmedia.appspot.com/o/EWERiSotLYed6BaFMLAtPcO0oc73%2Fprofilepicture%2Fprofilepic?alt=media&token=cbcefffe-a3ce-4fa5-9265-952899929560",doc.get("post_id").toString(),
+                            PostModel postModel=new PostModel(doc.get("userID").toString(),usernamelol,userimagelol,doc.get("post_id").toString(),
 
                                     doc.get("postimage").toString(),doc.get("posttext").toString(),
 
-                                    doc.get("timetsamp").toString()
+                                    doc.get("timetsamp").toString(),
+                                    (boolean)doc.get("hideLike"),(boolean)doc.get("hidecomt")
 
                             );
 

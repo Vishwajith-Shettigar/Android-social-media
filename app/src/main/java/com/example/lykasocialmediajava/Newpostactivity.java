@@ -27,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,10 +52,22 @@ MaterialButton newpostsendbtn;
 String imageAccessToken;
 int PICK_IMAGE=123;
 ProgressBar newpostprogress;
+String isEdit="false";
+
+String editpid;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newpostactivity);
+
+        isEdit="false";
+        Intent intent=getIntent();
+        isEdit=intent.getStringExtra("isEdit");
+
+
+
 
         newpostprogress=findViewById(R.id.newpostprogress);
 
@@ -66,6 +79,45 @@ ProgressBar newpostprogress;
 firebaseAuth=FirebaseAuth.getInstance();
 firebaseFirestore =FirebaseFirestore.getInstance();
 
+// if edit
+
+        if(isEdit.equals("true"))
+        {
+            String editimageurl,edittext;
+            editimageurl=intent.getStringExtra("postUrl");
+            edittext=intent.getStringExtra("text");
+            editpid=intent.getStringExtra("postID");
+            newpostsendbtn.setText("Update");
+            imagevideoreltvel.setEnabled(false);
+
+            if(editimageurl.contains("mp4"))
+            {
+
+                imageView.setVisibility(View.GONE);
+
+                videoView.setVisibility(View.VISIBLE);
+
+                videoView.setPadding(1,1,1,1);
+                videoView.setVideoURI(Uri.parse(editimageurl));
+
+videoView.start();
+                // starts the video
+
+
+            }
+            else{
+     Log.e("*",editimageurl);
+                videoView.setVisibility(View.GONE);
+                imageView.setVisibility(View.VISIBLE);
+                imageView.setPadding(1,1,1,1);
+
+                Picasso.get().load(Uri.parse(editimageurl)).into(imageView);
+            }
+            newposttextedit.setText(edittext);
+
+
+
+        }
 
         // selecct file
         imagevideoreltvel.setOnClickListener(new View.OnClickListener() {
@@ -83,21 +135,32 @@ firebaseFirestore =FirebaseFirestore.getInstance();
         newpostsendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(imagepath==null && newposttextedit.getText().toString().isEmpty()){
 
 
-                    Toast.makeText(Newpostactivity.this, "post cant be wmpty", Toast.LENGTH_SHORT).show();
-                }
-else {
-    newpostprogress.setVisibility(View.VISIBLE);
-                    sendImagetoStorage();
+if(isEdit.equals("false")) {
 
-                    newpostprogress.setVisibility(View.INVISIBLE);
-                    startActivity(new Intent(Newpostactivity.this,MainActivity.class));
-                    finish();
+    if (imagepath == null && newposttextedit.getText().toString().isEmpty()) {
 
-                }
 
+        Toast.makeText(Newpostactivity.this, "post cant be wmpty", Toast.LENGTH_SHORT).show();
+    } else {
+        newpostprogress.setVisibility(View.VISIBLE);
+        sendImagetoStorage();
+
+        newpostprogress.setVisibility(View.INVISIBLE);
+        startActivity(new Intent(Newpostactivity.this, MainActivity.class));
+        finish();
+
+    }
+}
+else{
+
+
+    firebaseFirestore.collection("posts").document(editpid).
+            update("posttext",newposttextedit.getText().toString());
+    finish();
+
+}
             }
         });
 
@@ -198,12 +261,15 @@ else {
     {
 
         CollectionReference collectionReference = firebaseFirestore.collection("posts");
-        Map<String,String > details=new HashMap<>();
+        Map<String,Object > details=new HashMap<>();
         details.put("userID",firebaseAuth.getUid());
 //        details.put("username",Usermodel.getUsername());
 //        details.put("userprofileimage",Usermodel.getImageurl());
         details.put("postimage","null");
         details.put("posttext","null");
+        details.put("hideLike",false);
+        details.put("hidecomt",false);
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
 

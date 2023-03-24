@@ -65,6 +65,25 @@ public class PostAdapter extends RecyclerView.Adapter {
 
         firebaseAuth=FirebaseAuth.getInstance();
         PostModel postModel=Postarraylist.get(position);
+
+
+
+        // set ishide is comt
+
+        if(postModel.gethideLike())
+        {
+
+            ((viewholder) holder).likecount.setVisibility(View.GONE);
+
+        }
+        if(postModel.gethideComt())
+        {
+
+            ((viewholder) holder).comcount.setVisibility(View.GONE);
+            ((viewholder) holder).commentbtn.setEnabled(false);
+
+        }
+
         Picasso.get().load(postModel.getUserimage()).into( ( (viewholder)holder).userdp);
         Log.e("*",postModel.getUsername()+" adapter");
        ( (viewholder)holder).username.setText(postModel.getUsername());
@@ -90,7 +109,7 @@ public class PostAdapter extends RecyclerView.Adapter {
 // Prepare exoplayer
                player.prepare();
 // Play media when it is ready
-               player.setPlayWhenReady(true);
+
 
 
            }else {
@@ -261,7 +280,9 @@ public  void setLikescount(RecyclerView.ViewHolder holder,PostModel postModel)
     ((viewholder)(holder)).threedot.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Postmenubottomsheet postmenubottomsheet=new Postmenubottomsheet(postModel.getPid());
+            Postmenubottomsheet postmenubottomsheet=new Postmenubottomsheet(postModel.getUid(),postModel.getPid(),
+                    postModel.getPimage(),postModel.getPtext(),postModel.gethideLike(),postModel.gethideComt()
+                    );
             postmenubottomsheet.show(((AppCompatActivity)context).getSupportFragmentManager(), "lol");
 
         }

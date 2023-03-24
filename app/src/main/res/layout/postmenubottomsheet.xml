@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/messageback"
     android:orientation="vertical"
-
+android:paddingBottom="30dp"
     >
 
     <RelativeLayout
@@ -83,6 +83,7 @@ android:textColor="@color/black"
             android:layout_marginRight="10dp"
             />
         <TextView
+            android:id="@+id/liketext"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,6 +113,7 @@ android:textColor="@color/black"
             android:layout_marginRight="10dp"
             />
         <TextView
+            android:id="@+id/comttext"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
