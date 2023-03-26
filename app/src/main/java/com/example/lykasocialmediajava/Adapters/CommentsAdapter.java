@@ -4,15 +4,18 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lykasocialmediajava.Commentactivity;
 import com.example.lykasocialmediajava.Model.CommentsModel;
 import com.example.lykasocialmediajava.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +36,7 @@ public class CommentsAdapter extends RecyclerView.Adapter {
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
+
 private Context context;
 ArrayList<CommentsModel>commentsArrayList;
 
@@ -94,6 +98,25 @@ Log.e("*","afdapter inside"+ details.get("username").toString());
 
 
 
+        ((viewmodel)holder).comntrelative.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+
+
+Log.e("*",firebaseAuth.getUid().equals(commentsModel.getPostUserID())+"");
+                if(firebaseAuth.getUid().equals(commentsModel.getUserID()) || firebaseAuth.getUid().equals(commentsModel.getPostUserID()) )
+                {
+                    ((Commentactivity)context).deleteComment(commentsModel.getComID());
+
+
+                }
+                return  true;
+            }
+
+
+        });
+
     }
 
 
@@ -108,12 +131,15 @@ Log.e("*","afdapter inside"+ details.get("username").toString());
         ImageView commentimage;
 TextView commentusername;
 TextView comnettext;
+RelativeLayout comntrelative;
 
         public viewmodel(@NonNull View itemView) {
             super(itemView);
             commentimage=itemView.findViewById(R.id.commentimage);
             commentusername=itemView.findViewById(R.id.commentusername);
             comnettext=itemView.findViewById(R.id.comnettext);
+            comntrelative=itemView.findViewById(R.id.comntrelative);
+
 
 
         }

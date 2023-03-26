@@ -35,10 +35,23 @@ android:layout_centerVertical="true"
     android:text="Comments"
     android:textSize="25dp"
     android:textColor="@color/black"
-
+android:id="@+id/cm"
     android:layout_marginLeft="15dp"
     android:layout_toRightOf="@+id/commnectbackbtn"
     />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+android:id="@+id/deletecmt"
+                android:layout_centerVertical="true"
+                android:src="@drawable/deleteicon"
+             android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp"
+                android:visibility="gone"
+
+
+                />
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>

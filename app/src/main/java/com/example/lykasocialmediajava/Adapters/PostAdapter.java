@@ -60,6 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter {
 
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
@@ -176,6 +177,8 @@ Log.e("*",postModel.getPimage());
             public void onClick(View view) {
                 Intent intent=new Intent(context, Commentactivity.class);
                 intent.putExtra("postID",postModel.getPid());
+                intent.putExtra("postUserID",postModel.getUid());
+
 
                 context.startActivity(intent);
             }
@@ -296,7 +299,7 @@ public  void setLikescount(RecyclerView.ViewHolder holder,PostModel postModel)
         return Postarraylist.size();
     }
 
-    public  class  viewholder extends RecyclerView.ViewHolder
+    public static class  viewholder extends RecyclerView.ViewHolder
 
     {
         ImageView userdp,postimage,likebtn,commentbtn;

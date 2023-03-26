@@ -1,6 +1,11 @@
 package com.example.lykasocialmediajava.Model;
 
-public class PostModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class PostModel implements Parcelable {
 
 
     String uid;
@@ -100,5 +105,15 @@ public class PostModel {
     public  boolean gethideComt()
     {
         return  hideComt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+
     }
 }

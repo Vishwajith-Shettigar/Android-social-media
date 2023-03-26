@@ -17,6 +17,7 @@ import com.example.lykasocialmediajava.Adapters.CommentsAdapter;
 import com.example.lykasocialmediajava.Adapters.PostAdapter;
 import com.example.lykasocialmediajava.Model.CommentsModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,11 +36,12 @@ EditText comtext;
 FirebaseAuth firebaseAuth;
 FirebaseFirestore firebaseFirestore;
 
-String post_ID;
+String post_ID,POST_USERID;
 ArrayList<CommentsModel>commentsModelArrayList;
-
+String comIDDelete="";
 RecyclerView recyclerView;
     CommentsAdapter commentsAdapter;
+    ImageView deletecmt;
 
 ImageView comsend;
     @Override
@@ -48,7 +50,7 @@ ImageView comsend;
         setContentView(R.layout.activity_commentactivity);
 
         recyclerView=findViewById(R.id.commentrecycler);
-
+deletecmt=findViewById(R.id.deletecmt);
 firebaseAuth=FirebaseAuth.getInstance();
 firebaseFirestore=FirebaseFirestore.getInstance();
 commentsModelArrayList=new ArrayList<>();
@@ -58,6 +60,8 @@ commentsModelArrayList=new ArrayList<>();
         comsend=findViewById(R.id.sendbutn);
         Intent intent = getIntent();
        post_ID=intent.getStringExtra("postID");
+       POST_USERID=intent.getStringExtra("postUserID");
+
 
         recyclerView.setHasFixedSize(true);
         getComments();
@@ -87,6 +91,7 @@ comsend.setOnClickListener(new View.OnClickListener() {
             Map<String, String> comdetails = new HashMap<>();
             comdetails.put("userID", firebaseAuth.getUid());
             comdetails.put("postID",post_ID );
+            comdetails.put("postUserID",POST_USERID);
 String comid=Math.random()+""+Math.random()+Math.random();
 comdetails.put("comID",comid);
             comdetails.put("commenttext", comtext.getText().toString());
@@ -133,7 +138,8 @@ comdetails.put("comID",comid);
                                 details.get("userID").toString(),
                                 details.get("commenttext").toString(),
 
-                                details.get("postID").toString()
+                                details.get("postID").toString(),
+                                details.get("postUserID").toString()
                         );
 
                         commentsModelArrayList.add(commentsModel1);
@@ -150,10 +156,38 @@ comdetails.put("comID",comid);
 
 
         });
+        deletecmt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                firebaseFirestore.collection("Comments").document(comIDDelete).delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                getComments();
+                                setrecyclerview();
+                            }
+                        });
+                comIDDelete="";
+                deletecmt.setVisibility(View.GONE);
+                Toast.makeText(Commentactivity.this, "dleted", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    public  void  deleteComment(String commmentID)
+    {
+
+        comIDDelete=commmentID;
+        deletecmt.setVisibility(View.VISIBLE);
+
+
 
     }
     private void setrecyclerview() {
-        CommentsAdapter commentsAdapter=new CommentsAdapter(getApplicationContext(),commentsModelArrayList);
+        CommentsAdapter commentsAdapter=new CommentsAdapter(this,commentsModelArrayList);
         recyclerView.setAdapter(commentsAdapter);
     }
 }
