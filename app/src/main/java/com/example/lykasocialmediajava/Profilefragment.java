@@ -27,6 +27,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import org.checkerframework.checker.guieffect.qual.UI;
@@ -45,7 +46,7 @@ public class Profilefragment extends Fragment {
     FirebaseFirestore firebaseFirestore;
     String UID;
     boolean Owner= true;
-TextView usernameprofile;
+TextView usernameprofile,followeesno,followingsno,postnumber;
 TextView profilesecnamefullname;
 TextView profilebio;
 ImageView userprofilepic;
@@ -71,14 +72,17 @@ Bundle bundle;
 
         editbtn=view.findViewById(R.id.editbtn);
         messagebtn=view.findViewById(R.id.messagebtn);
+followeesno=view.findViewById(R.id.followeesno);
+followingsno=view.findViewById(R.id.followingno);
 
-
+        postnumber=view.findViewById(R.id.postnumber);
         usernameprofile=view.findViewById(R.id.usernameprofile);
             profilesecnamefullname=view.findViewById(R.id.profilesecnamefullname);
             profilebio=view.findViewById(R.id.profilebio);
             userprofilepic=view.findViewById(R.id.userprofilepic);
 
 followbtn=view.findViewById(R.id.followbtn);
+
 
 
             getData();
@@ -93,6 +97,61 @@ followbtn=view.findViewById(R.id.followbtn);
             }
         });
 
+
+followbtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+
+        firebaseFirestore.collection("Following").whereEqualTo("id",FirebaseAuth.getInstance().getUid()+""+UID)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            if(task.getResult().size()!=0)
+                            {
+                                followbtn.setText("Follow");
+                                firebaseFirestore.collection("Following").document(FirebaseAuth.getInstance().getUid()+""+UID)
+                                        .delete();
+                                firebaseFirestore.collection("Follower").document(UID+""+FirebaseAuth.getInstance().getUid())
+                                        .delete();
+
+
+                            }
+                            else{
+
+                                Map<String,Object>detaila=new HashMap<>();
+                                detaila.put("ownerID",firebaseAuth.getUid());
+                                detaila.put("followingID",UID);
+                                detaila.put("id",FirebaseAuth.getInstance().getUid()+""+UID);
+
+
+                                followbtn.setText("Unfollow");
+                                firebaseFirestore.collection("Following").document(FirebaseAuth.getInstance().getUid()+""+UID)
+                                        .set(detaila);
+
+
+                                Map<String,Object>details2=new HashMap<>();
+                                details2.put("ownerID",UID);
+                                details2.put("followerID",firebaseAuth.getUid());
+                                details2.put("id",UID+""+FirebaseAuth.getInstance().getUid());
+
+
+
+                                firebaseFirestore.collection("Follower").document(UID+""+FirebaseAuth.getInstance().getUid())
+                                        .set(details2);
+
+                            }
+                        }
+                    }
+                });
+
+
+
+
+
+    }
+});
 
 
         return  view;
@@ -114,6 +173,24 @@ Log.e("*",Owner+ "hello---");
         }
         else
         {
+
+
+firebaseFirestore.collection("Following").whereEqualTo("id",FirebaseAuth.getInstance().getUid()+""+UID)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    if(task.getResult().size()!=0)
+                    {
+                        followbtn.setText("Unfollow");
+                    }
+                }
+            }
+        });
+
+
+
             Log.e("*",Owner+ "oin elsoe---");
             editbtn.setVisibility(View.GONE);
             followbtn.setVisibility(View.VISIBLE);
@@ -139,6 +216,47 @@ Log.e("*",Owner+ "hello---");
                     });
         }
 
+        firebaseFirestore.collection("Follower").whereEqualTo("ownerID",UID)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+        followeesno.setText(task.getResult().size()+"");
+
+
+                        }
+                    }
+                });
+
+        firebaseFirestore.collection("Following").whereEqualTo("ownerID",UID)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            followingsno.setText(task.getResult().size()+"");
+
+
+                        }
+                    }
+                });
+
+        firebaseFirestore.collection("posts").whereEqualTo("userID",UID)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            postnumber.setText(task.getResult().size()+"");
+
+
+                        }
+                    }
+                });
+
     }
+
+
 
 }
