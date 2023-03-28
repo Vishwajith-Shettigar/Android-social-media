@@ -121,12 +121,26 @@ break;
                    case R.id.accountmenu: {
                        Toast.makeText(MainActivity.this, "account", Toast.LENGTH_SHORT).show();
                        FragmentManager fragmentManager =
-                               getSupportFragmentManager();
+                                getSupportFragmentManager();
+
+                       Bundle bundle = new Bundle();
+
+                       bundle.putBoolean("owner",  true);
+                       bundle.putString("userID",firebaseAuth.getUid());
+
+
+
+                       Profilefragment profilefragment = new Profilefragment();
+                       profilefragment.setArguments(bundle);
                        FragmentTransaction fragmentTransaction =
                                fragmentManager.beginTransaction();
 
                        fragmentTransaction.replace
-                               (R.id.fragment_contnair, new Profilefragment()).commit();
+                               (R.id.fragment_contnair, profilefragment).addToBackStack( "tag" ).commit();
+
+
+
+
                    }
                    break;
                }

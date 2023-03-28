@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -70,7 +72,7 @@ fetchPosts();
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         homefragmentrecyclerview.setLayoutManager(linearLayoutManager);
-         postAdapter=new PostAdapter(postModelArrayList,getActivity());
+         postAdapter=new PostAdapter(postModelArrayList,getActivity(),Homefragment.this);
 homefragmentrecyclerview.setAdapter(postAdapter);
 
 
@@ -168,6 +170,31 @@ QuerySnapshot querySnapshot=task.getResult();
                 }
             }
         });
+
+    }
+    public void gotToprofile(String UID){
+
+        FragmentManager fragmentManager =
+                (getActivity()). getSupportFragmentManager();
+
+        Bundle bundle = new Bundle();
+
+        bundle.putBoolean("owner",  false);
+        bundle.putString("userID",UID);
+
+        Profilefragment profilefragment = new Profilefragment();
+        profilefragment.setArguments(bundle);
+        FragmentTransaction fragmentTransaction =
+                fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace
+                (R.id.fragment_contnair, profilefragment).addToBackStack( "tag" ).commit();
+
+
+
+
+
+
 
     }
 }

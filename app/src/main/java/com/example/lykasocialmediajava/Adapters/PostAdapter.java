@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lykasocialmediajava.Commentactivity;
+import com.example.lykasocialmediajava.Homefragment;
 import com.example.lykasocialmediajava.Likesactivity;
 import com.example.lykasocialmediajava.Model.PostModel;
 import com.example.lykasocialmediajava.Postmenubottomsheet;
@@ -42,11 +43,20 @@ public class PostAdapter extends RecyclerView.Adapter {
     ArrayList<PostModel>Postarraylist;
 
   Context context;
+  Homefragment homefragment;
 
+    public PostAdapter(ArrayList<PostModel> postarraylist, Context context,Homefragment homefragment) {
+        Postarraylist = postarraylist;
+        this.context = context;
+        Log.e("*","inadapter");
+    this.homefragment    =homefragment;
+
+    }
     public PostAdapter(ArrayList<PostModel> postarraylist, Context context) {
         Postarraylist = postarraylist;
         this.context = context;
         Log.e("*","inadapter");
+
 
     }
 
@@ -240,6 +250,12 @@ Log.e("*",postModel.getPimage());
             }
         });
 
+        ( (viewholder)holder).userdp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+homefragment.gotToprofile(postModel.getUid());
+            }
+        });
 
     }
 
