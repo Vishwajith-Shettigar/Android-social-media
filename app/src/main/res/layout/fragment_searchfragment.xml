@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".Searchfragment"
-
+android:layout_gravity="center"
+    android:gravity="center"
 
     >
 
@@ -117,7 +118,7 @@ android:background="#6B6969"
     android:id="@+id/searchrecyclerview"
     android:padding="5dp"
     android:layout_below="@+id/searchline"
-
+android:foregroundGravity="center"
 
      />
 </RelativeLayout>
