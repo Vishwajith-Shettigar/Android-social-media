@@ -1,6 +1,11 @@
 package com.example.lykasocialmediajava.Model;
 
-public class Searchusermodel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Searchusermodel  implements Parcelable {
     String userID,username,name, userImage;
 
     public Searchusermodel(String userID, String username, String name,String userimage) {
@@ -41,5 +46,15 @@ public class Searchusermodel {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+
     }
 }

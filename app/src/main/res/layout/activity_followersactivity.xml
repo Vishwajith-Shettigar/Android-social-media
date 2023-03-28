@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Followersactivity">
+    tools:context=".Followersactivity"
+    android:background="@color/white"
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -44,7 +46,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/commnetsrecyclerview"
+        android:id="@+id/followerrecycler"
         android:layout_below="@id/followersactoolbar"
         android:padding="5dp"
 

@@ -33,6 +33,7 @@ import com.squareup.picasso.Picasso;
 import org.checkerframework.checker.guieffect.qual.UI;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +46,8 @@ public class Profilefragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
     String UID;
+    ArrayList<String>Followings=new ArrayList<>();
+    ArrayList<String>Followers=new ArrayList<>();
     boolean Owner= true;
 TextView usernameprofile,followeesno,followingsno,postnumber;
 TextView profilesecnamefullname;
@@ -97,6 +100,27 @@ followbtn=view.findViewById(R.id.followbtn);
             }
         });
 
+
+        followingsno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),Followingactivity.class);
+                intent.putExtra("Following",Followings);
+                Log.e("@",Followings.size()+"----------------");
+                startActivity(intent);
+            }
+        });
+
+        followeesno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),Followersactivity.class);
+                intent.putExtra("Follower",Followers);
+                Log.e("@",Followers.size()+"----------------");
+                startActivity(intent);
+
+            }
+        });
 
 followbtn.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -225,6 +249,26 @@ firebaseFirestore.collection("Following").whereEqualTo("id",FirebaseAuth.getInst
         followeesno.setText(task.getResult().size()+"");
 
 
+
+
+                                QuerySnapshot querySnapshot=task.getResult();
+                                ArrayList<DocumentSnapshot> documentSnapshot= (ArrayList<DocumentSnapshot>) querySnapshot.getDocuments();
+                                for(int i=0;i<task.getResult().size();i++)
+                                {
+
+                                    DocumentSnapshot documentSnapshot1=documentSnapshot.get(i);
+                                    Followers.add((String) documentSnapshot1.getData().get("followerID"));
+
+
+
+
+                                }
+
+
+
+
+
+
                         }
                     }
                 });
@@ -236,6 +280,21 @@ firebaseFirestore.collection("Following").whereEqualTo("id",FirebaseAuth.getInst
                         if(task.isSuccessful())
                         {
                             followingsno.setText(task.getResult().size()+"");
+
+                            QuerySnapshot querySnapshot=task.getResult();
+                            ArrayList<DocumentSnapshot> documentSnapshot= (ArrayList<DocumentSnapshot>) querySnapshot.getDocuments();
+                        for(int i=0;i<task.getResult().size();i++)
+                        {
+
+DocumentSnapshot documentSnapshot1=documentSnapshot.get(i);
+Followings.add((String) documentSnapshot1.getData().get("followingID"));
+
+
+
+
+                        }
+
+
 
 
                         }
