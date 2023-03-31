@@ -48,6 +48,7 @@
                 android:id="@+id/searchusername"
                 android:text="vishwajit shettigar"
                 android:textStyle="bold"
+                android:textColor="@color/black"
 
                 />
             <TextView
@@ -57,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/searchusername"
                 android:text="DarkDronzer "
+                android:textColor="#454141"
 
                 />
 

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Favouritefragment">
+    tools:context=".Favouritefragment"
+    android:background="@color/white"
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -45,6 +47,7 @@
        android:layout_height="match_parent"
 android:id="@+id/favouriterecyclerview"
        android:padding="5dp"
+
        android:layout_below="@+id/toolbarfavourite"
        />
 

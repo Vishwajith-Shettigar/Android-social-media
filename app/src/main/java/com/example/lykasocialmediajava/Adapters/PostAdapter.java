@@ -251,10 +251,14 @@ Log.e("*",postModel.getPimage());
                     Map<String,Object>detailsnoti=new HashMap<>();
 
                     detailsnoti.put("toUserid",postModel.getUid());
+
                     detailsnoti.put("fromUserid",firebaseAuth.getUid());
+                    detailsnoti.put("fromUsername",Usermodel.getUsername());
+                    detailsnoti.put("fromImage",Usermodel.getImageurl());
+
                     detailsnoti.put("text",Usermodel.getUsername() +" Liked your post");
 
-notiref.document(postModel.getUid()+Math.random()+"").set(detailsnoti);
+notiref.document(postModel.getUid()+""+postModel.getPid()+"").set(detailsnoti);
 
 
 
