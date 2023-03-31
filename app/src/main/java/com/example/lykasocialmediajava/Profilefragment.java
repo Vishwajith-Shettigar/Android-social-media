@@ -20,13 +20,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lykasocialmediajava.Adapters.PostAdapter;
+import com.example.lykasocialmediajava.Adapters.Searchfargadapter;
+import com.example.lykasocialmediajava.Model.PostModel;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
@@ -35,6 +44,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -42,6 +52,7 @@ import java.util.Map;
 public class Profilefragment extends Fragment {
 
     MaterialButton editbtn;
+ArrayList<PostModel>postModelArrayList;
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
@@ -54,7 +65,9 @@ TextView profilesecnamefullname;
 TextView profilebio;
 ImageView userprofilepic;
 MaterialButton followbtn,messagebtn;
+    RecyclerView profilepostrecyclerview;
 
+Searchfargadapter searchfargadapter;
 
 
     @Override
@@ -65,9 +78,15 @@ MaterialButton followbtn,messagebtn;
         View view= inflater.inflate(R.layout.fragment_profilefragment, container, false);
 Bundle bundle;
         Owner= true;
+        postModelArrayList=new ArrayList<>();
+
         bundle = getArguments();
         Owner=bundle.getBoolean("owner");
         UID=bundle.getString("userID");
+
+        profilepostrecyclerview=view.findViewById(R.id.profilepostrecyclerview);
+
+
 
 
         firebaseAuth=FirebaseAuth.getInstance();
@@ -89,6 +108,27 @@ followbtn=view.findViewById(R.id.followbtn);
 
 
             getData();
+
+
+
+        (profilepostrecyclerview).setHasFixedSize(true);
+
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,1);
+        FlexboxLayoutManager flexboxLayoutManager=new FlexboxLayoutManager(getActivity());
+
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_END);
+
+
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        profilepostrecyclerview.setLayoutManager(flexboxLayoutManager);
+        searchfargadapter=new Searchfargadapter(getActivity(),postModelArrayList,Profilefragment.this);
+        profilepostrecyclerview.setAdapter(searchfargadapter);
+
+
+        getPosts();
+
+
+
 
 
         editbtn.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +219,84 @@ followbtn.setOnClickListener(new View.OnClickListener() {
 
 
         return  view;
+    }
+
+    public void getPosts()
+    {
+        {
+
+            CollectionReference postcollection= firebaseFirestore.collection("posts");
+            postcollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                    if(task.isSuccessful())
+                    {
+                        QuerySnapshot queryDocumentSnapshots=task.getResult();
+
+                        for (int i=0;i<task.getResult().size();i++)
+                        {
+
+                            String postusername,postuserimage;
+                            Map<String, Object> doc   =(queryDocumentSnapshots.getDocuments().get(i)).getData();
+
+
+                            Query query=firebaseFirestore.collection("users").whereEqualTo("userID",doc.get("userID").toString());
+                            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if(task.isSuccessful()){
+
+
+                                        QuerySnapshot querySnapshot=task.getResult();
+                                        List<DocumentSnapshot> documentSnapshots=querySnapshot.getDocuments();
+                                        DocumentSnapshot documentSnapshot1=documentSnapshots.get(0);
+
+                                        Map<String,Object> details=new HashMap<>();
+                                        details =documentSnapshot1.getData();
+                                        Log.e("*",details.get("username").toString());
+                                    String    usernamelol=details.get("username").toString();
+                                        String userimagelol=details.get("imageurl").toString();
+
+
+
+                                        Log.e("*",doc.get("posttext").toString() +" ininna");
+                                        PostModel postModel=new PostModel(doc.get("userID").toString(),usernamelol,userimagelol,doc.get("post_id").toString(),
+
+                                                doc.get("postimage").toString(),doc.get("posttext").toString(),
+
+                                                doc.get("timetsamp").toString(),
+                                                (boolean)doc.get("hideLike"),(boolean)doc.get("hidecomt")
+
+                                        );
+
+                                        postModelArrayList.add(postModel);
+                                        Log.e("*", String.valueOf(postModelArrayList.size()));
+                                        userimagelol="";
+                                        usernamelol="";
+                                        searchfargadapter.notifyDataSetChanged();
+
+                                    }
+                                }
+                            });
+
+
+
+
+
+
+
+
+                        }
+
+
+
+                    }
+                }
+            });
+
+        }
+
     }
 
     void getData() {

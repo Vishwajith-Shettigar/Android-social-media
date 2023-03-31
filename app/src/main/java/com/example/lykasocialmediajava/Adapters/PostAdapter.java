@@ -21,6 +21,7 @@ import com.example.lykasocialmediajava.Likesactivity;
 import com.example.lykasocialmediajava.Model.PostModel;
 import com.example.lykasocialmediajava.Postmenubottomsheet;
 import com.example.lykasocialmediajava.R;
+import com.example.lykasocialmediajava.Usermodel;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.PlayerView;
@@ -244,6 +245,17 @@ Log.e("*",postModel.getPimage());
                     ((viewholder)holder). liked =true;
                     ((viewholder)holder).nolikes=  (Integer.parseInt(((viewholder)holder).nolikes)+1)+"";
                     setLikes(holder);
+
+                    CollectionReference notiref=firebaseFirestore.collection("Notification");
+
+                    Map<String,Object>detailsnoti=new HashMap<>();
+
+                    detailsnoti.put("toUserid",postModel.getUid());
+                    detailsnoti.put("fromUserid",firebaseAuth.getUid());
+                    detailsnoti.put("text",Usermodel.getUsername() +" Liked your post");
+
+notiref.document(postModel.getUid()+Math.random()+"").set(detailsnoti);
+
 
 
                 }

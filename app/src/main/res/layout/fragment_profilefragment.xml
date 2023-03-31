@@ -62,6 +62,7 @@
     </androidx.appcompat.widget.Toolbar>
 <RelativeLayout
     android:padding="10dp"
+    android:paddingBottom="0dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/profilesection"
@@ -321,7 +322,9 @@ android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-android:padding="5dp"
+android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="0dp"
             android:id="@+id/profilepostrecyclerview"
             />
 

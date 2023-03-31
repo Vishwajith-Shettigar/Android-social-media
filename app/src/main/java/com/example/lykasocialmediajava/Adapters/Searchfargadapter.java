@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lykasocialmediajava.Commentactivity;
 import com.example.lykasocialmediajava.Model.PostModel;
+import com.example.lykasocialmediajava.Profilefragment;
 import com.example.lykasocialmediajava.R;
 import com.example.lykasocialmediajava.Searchfragment;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -30,6 +31,7 @@ public class Searchfargadapter extends RecyclerView.Adapter {
 
     Context context;
 Searchfragment searchfragment;
+Profilefragment profilefragment;
     ArrayList<PostModel>arrayList;
 
     public Searchfargadapter(Context context, ArrayList<PostModel> arrayList,Searchfragment searchfragment) {
@@ -37,6 +39,12 @@ Searchfragment searchfragment;
         this.arrayList = arrayList;
         this.searchfragment=searchfragment;
     }
+    public Searchfargadapter(Context context, ArrayList<PostModel> arrayList,Profilefragment profilefragment) {
+        this.context = context;
+        this.arrayList = arrayList;
+        this.profilefragment=profilefragment;
+    }
+
 
     @NonNull
     @Override
