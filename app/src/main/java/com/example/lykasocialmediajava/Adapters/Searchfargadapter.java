@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class Searchfargadapter extends RecyclerView.Adapter {
 
     Context context;
-Searchfragment searchfragment;
-Profilefragment profilefragment;
+Searchfragment searchfragment=null;
+Profilefragment profilefragment=null;
     ArrayList<PostModel>arrayList;
 
     public Searchfargadapter(Context context, ArrayList<PostModel> arrayList,Searchfragment searchfragment) {
@@ -97,9 +97,15 @@ Profilefragment profilefragment;
         ((viewholder)holder).exployerelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+Log.e("*","hiii-0=-0-=0");
+if(searchfragment!=null){
+    searchfragment.goToExplore();
+} else if (profilefragment!=null) {
 
+profilefragment.goToPostAc();
 
-                searchfragment.goToExplore();
+}
+
 
             }
         });

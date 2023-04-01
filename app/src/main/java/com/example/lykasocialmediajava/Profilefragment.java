@@ -20,6 +20,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lykasocialmediajava.Adapters.PostAdapter;
@@ -242,8 +244,9 @@ followbtn.setOnClickListener(new View.OnClickListener() {
     {
         {
 
-            CollectionReference postcollection= firebaseFirestore.collection("posts");
-            postcollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+           firebaseFirestore.collection("posts")
+                    .whereEqualTo("userID",UID)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
@@ -460,6 +463,29 @@ Followings.add((String) documentSnapshot1.getData().get("followingID"));
 
     }
 
+    public void goToPostAc(){
 
+        FragmentManager fragmentManager =
+                (getActivity()). getSupportFragmentManager();
+
+        Bundle bundle = new Bundle();
+
+        bundle.putParcelableArrayList("arraylist",  postModelArrayList);
+
+        Postfragment postfragment = new Postfragment();
+        postfragment.setArguments(bundle);
+        FragmentTransaction fragmentTransaction =
+                fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace
+                (R.id.fragment_contnair, postfragment).addToBackStack( "tag" ).commit();
+
+
+
+
+
+
+
+    }
 
 }
