@@ -18,8 +18,9 @@ public class PostModel implements Parcelable {
 
     boolean hideLike;
     boolean hideComt;
+    boolean isAnony;
 
-    public PostModel(String uid, String username, String userimage, String pid, String pimage, String ptext, String ttime,boolean hideLike,boolean hideComt) {
+    public PostModel(String uid, String username, String userimage, String pid, String pimage, String ptext, String ttime,boolean hideLike,boolean hideComt,boolean isAnony) {
         this.uid = uid;
         this.username = username;
         this.userimage = userimage;
@@ -29,7 +30,25 @@ public class PostModel implements Parcelable {
         this.ttime = ttime;
         this.hideLike=hideLike;
         this.hideComt=hideComt;
+        this.isAnony=isAnony;
 
+
+    }
+
+    public boolean isHideLike() {
+        return hideLike;
+    }
+
+    public boolean isHideComt() {
+        return hideComt;
+    }
+
+    public boolean isAnony() {
+        return isAnony;
+    }
+
+    public void setAnony(boolean anony) {
+        isAnony = anony;
     }
 
     public String getUid() {

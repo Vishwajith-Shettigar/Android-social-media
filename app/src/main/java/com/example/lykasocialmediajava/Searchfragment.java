@@ -162,8 +162,9 @@ String  usernamelol,userimagelol;
                                             doc.get("postimage").toString(),doc.get("posttext").toString(),
 
                                             doc.get("timetsamp").toString(),
-                                            (boolean)doc.get("hideLike"),(boolean)doc.get("hidecomt")
+                                            (boolean)doc.get("hideLike"),(boolean)doc.get("hidecomt"),
 
+                                            (boolean)doc.get("isAnony")
                                     );
 
                                     postModelArrayList.add(postModel);

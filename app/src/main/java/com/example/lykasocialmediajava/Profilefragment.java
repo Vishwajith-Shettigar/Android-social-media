@@ -205,6 +205,23 @@ followbtn.setOnClickListener(new View.OnClickListener() {
                                 firebaseFirestore.collection("Follower").document(UID+""+FirebaseAuth.getInstance().getUid())
                                         .set(details2);
 
+
+
+                                CollectionReference notiref=firebaseFirestore.collection("Notification");
+
+                                Map<String,Object>detailsnoti=new HashMap<>();
+
+                                detailsnoti.put("toUserid",UID);
+
+                                detailsnoti.put("fromUserid",firebaseAuth.getUid());
+                                detailsnoti.put("fromUsername",Usermodel.getUsername());
+                                detailsnoti.put("fromImage",Usermodel.getImageurl());
+
+                                detailsnoti.put("text",Usermodel.getUsername() +" followed you");
+
+                                notiref.document(firebaseAuth.getUid()+""+UID+"").set(detailsnoti);
+
+
                             }
                         }
                     }
@@ -266,15 +283,24 @@ followbtn.setOnClickListener(new View.OnClickListener() {
                                                 doc.get("postimage").toString(),doc.get("posttext").toString(),
 
                                                 doc.get("timetsamp").toString(),
-                                                (boolean)doc.get("hideLike"),(boolean)doc.get("hidecomt")
+                                                (boolean)doc.get("hideLike"),(boolean)doc.get("hidecomt"),
+                                                (boolean)doc.get("isAnony")
+
 
                                         );
 
-                                        postModelArrayList.add(postModel);
-                                        Log.e("*", String.valueOf(postModelArrayList.size()));
-                                        userimagelol="";
-                                        usernamelol="";
-                                        searchfargadapter.notifyDataSetChanged();
+                                        if(!Owner && postModel.isAnony()==true )
+                                        {
+
+                                        }
+                                        else {
+
+                                            postModelArrayList.add(postModel);
+                                            Log.e("*", String.valueOf(postModelArrayList.size()));
+                                            userimagelol = "";
+                                            usernamelol = "";
+                                            searchfargadapter.notifyDataSetChanged();
+                                        }
 
                                     }
                                 }

@@ -96,11 +96,16 @@ public class PostAdapter extends RecyclerView.Adapter {
 
         }
 
-        Picasso.get().load(postModel.getUserimage()).into( ( (viewholder)holder).userdp);
-        Log.e("*",postModel.getUsername()+" adapter");
-       ( (viewholder)holder).username.setText(postModel.getUsername());
+        if(!postModel.isAnony()) {
+            Picasso.get().load(postModel.getUserimage()).into(((viewholder) holder).userdp);
+            Log.e("*", postModel.getUsername() + " adapter");
+            ((viewholder) holder).username.setText(postModel.getUsername());
 
+        }else{
 
+            ((viewholder) holder).username.setText("Anonymous");
+            ( (viewholder)holder).userdp.setEnabled(false);
+        }
        if((postModel.getPimage().equals("null"))) {
            ((viewholder) holder).postimage.setVisibility(View.GONE);
            ((viewholder) holder).postvideo.setVisibility(View.GONE);

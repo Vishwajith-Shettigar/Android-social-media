@@ -99,6 +99,14 @@ android:textColor="@color/black"
           android:id="@+id/newposttextedit"
             android:textColorHint="#868181"
             />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
+
+
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
@@ -106,9 +114,24 @@ android:textColor="@color/black"
 android:text="post"
             android:id="@+id/newpostsendbtn"
 
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+
 android:layout_marginTop="20dp"
             />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anonymous"
+            android:id="@+id/switchanony"
+android:layout_toRightOf="@+id/newpostsendbtn"
+            android:padding="3dp"
+           android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"
+
+
+            />
+</RelativeLayout>
 
         <ProgressBar
             android:id="@+id/newpostprogress"

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -21,6 +22,7 @@ import android.widget.VideoView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,6 +44,9 @@ public class Newpostactivity extends AppCompatActivity {
 ImageView imageView;
 VideoView videoView;
 
+SwitchMaterial switchanony;
+
+
 EditText newposttextedit;
 RelativeLayout imagevideoreltvel;
 Uri imagepath=null;
@@ -56,11 +61,17 @@ String isEdit="false";
 
 String editpid;
 
+boolean isAnony=false;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newpostactivity);
+        switchanony=findViewById(R.id.switchanony);
+
 
         isEdit="false";
         Intent intent=getIntent();
@@ -81,6 +92,7 @@ firebaseFirestore =FirebaseFirestore.getInstance();
 
 // if edit
 
+
         if(isEdit.equals("true"))
         {
             String editimageurl,edittext;
@@ -89,6 +101,8 @@ firebaseFirestore =FirebaseFirestore.getInstance();
             editpid=intent.getStringExtra("postID");
             newpostsendbtn.setText("Update");
             imagevideoreltvel.setEnabled(false);
+            switchanony.setEnabled(false);
+
 
             if(editimageurl.contains("mp4"))
             {
@@ -118,6 +132,20 @@ videoView.start();
 
 
         }
+
+
+        // switch
+
+        switchanony.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Log.e("*",b+"");
+isAnony=b;
+
+
+
+            }
+        });
 
         // selecct file
         imagevideoreltvel.setOnClickListener(new View.OnClickListener() {
@@ -269,6 +297,8 @@ else{
         details.put("posttext","null");
         details.put("hideLike",false);
         details.put("hidecomt",false);
+        details.put("isAnony",isAnony);
+
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
