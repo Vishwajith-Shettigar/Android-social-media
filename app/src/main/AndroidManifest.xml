@@ -17,6 +17,9 @@
             android:name=".Likesactivity"
             android:exported="false" />
         <activity
+            android:name=".Specificchat"
+            android:exported="false" />
+        <activity
             android:name=".Editprofileactivity"
             android:exported="false" />
         <activity

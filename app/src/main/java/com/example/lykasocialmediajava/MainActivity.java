@@ -4,8 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity   {
 
     BottomNavigationView bottomNavigationView;
     FirebaseAuth firebaseAuth;
@@ -236,8 +242,24 @@ break;
                     }
                 }
             });
+
+
         }
 
 
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        DocumentReference documentReference=firebaseFirestore.collection("users").document(firebaseAuth.getUid());
+        documentReference.update("status","online");
+
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        DocumentReference documentReference=firebaseFirestore.collection("users").document(firebaseAuth.getUid());
+        documentReference.update("status","offline");
+    }
+
+
 }

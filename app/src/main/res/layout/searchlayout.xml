@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:padding="6dp"
+    android:id="@+id/searchla"
 
     >
     <RelativeLayout
