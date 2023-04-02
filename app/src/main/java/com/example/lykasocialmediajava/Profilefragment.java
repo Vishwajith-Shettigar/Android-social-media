@@ -131,6 +131,23 @@ followbtn=view.findViewById(R.id.followbtn);
 
 
 
+        messagebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Map<String,Object> details=new HashMap<>();
+                details.put("fromUID",firebaseAuth.getUid());
+                details.put("toUID",UID);
+                details.put("convID",firebaseAuth.getUid()+""+UID);
+
+                firebaseFirestore.collection("chats").document(firebaseAuth.getUid()+""+UID)
+                        .set(details);
+
+                Intent intent=new Intent(getActivity(),Chatactivity.class);
+                startActivity(intent);
+
+            }
+        });
 
 
         editbtn.setOnClickListener(new View.OnClickListener() {
