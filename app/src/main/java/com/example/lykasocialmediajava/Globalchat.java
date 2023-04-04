@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.lykasocialmediajava.Adapters.Globalmessagesadapter;
 import com.example.lykasocialmediajava.Adapters.MessagesAdapter;
+import com.example.lykasocialmediajava.Model.Globalmessages;
 import com.example.lykasocialmediajava.Model.Messages;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +49,7 @@ public class Globalchat extends AppCompatActivity {
 
 
 
-    ArrayList<Messages> messagesArrayList;
+    ArrayList<Globalmessages> messagesArrayList;
     String currenttime;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
@@ -93,7 +95,7 @@ globalmessagesadapter =new Globalmessagesadapter(this,messagesArrayList);
                     currenttime=simpleDateFormat.format(calendar.getTime());
 
 
-                    Messages messages=new Messages(enteredmessage,firebaseAuth.getUid(), date.getTime(),currenttime);
+                    Globalmessages messages=new Globalmessages(enteredmessage,firebaseAuth.getUid(), date.getTime(),currenttime,"");
 
                     firebaseDatabase=FirebaseDatabase.getInstance();
                     firebaseDatabase.getReference().child("Globalchats")
@@ -126,9 +128,10 @@ globalmessagesadapter =new Globalmessagesadapter(this,messagesArrayList);
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messagesArrayList.clear();
                 for (DataSnapshot snapshot1:snapshot.getChildren() ){
-
-
-                    Messages messages=snapshot1.getValue(Messages.class);
+                    Log.e("*","---------iii0--------");
+                    Log.e("*","---------iii--------"+snapshot1.getKey());
+                    Globalmessages messages=snapshot1.getValue(Globalmessages.class);
+                    messages.setDockey(snapshot1.getKey());
                     messagesArrayList.add(messages);
 
                     globalmessagesadapter.notifyDataSetChanged();

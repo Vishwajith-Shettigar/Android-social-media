@@ -82,6 +82,16 @@ android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_foreground" />
 </androidx.cardview.widget.CardView>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"
+android:src="@drawable/deleteicon"
+        android:visibility="gone"
+        android:id="@+id/deletechat"
+        android:layout_alignParentEnd="true"
+        />
 </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 

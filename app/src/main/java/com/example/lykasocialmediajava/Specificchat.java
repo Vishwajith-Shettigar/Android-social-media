@@ -2,6 +2,7 @@ package com.example.lykasocialmediajava;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lykasocialmediajava.Adapters.MessagesAdapter;
+import com.example.lykasocialmediajava.Model.Globalmessages;
 import com.example.lykasocialmediajava.Model.Messages;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +33,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.internal.cache.DiskLruCache;
 
 public class Specificchat extends AppCompatActivity {
 
@@ -48,8 +55,10 @@ public class Specificchat extends AppCompatActivity {
     String senderroom,receiverroom;
     RecyclerView recyclerView;
     MessagesAdapter messagesAdapter;
+ImageView deletechat;
 
-    ArrayList<Messages>messagesArrayList;
+
+    ArrayList<Globalmessages>messagesArrayList;
     String currenttime;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
@@ -83,6 +92,7 @@ convID=getIntent().getStringExtra("convID");
 recievername=getIntent().getStringExtra("username");
 receiverimage=getIntent().getStringExtra("image");
 receiverstatus=getIntent().getStringExtra("status");
+        deletechat=findViewById(R.id.deletechat);
 
 username.setText(recievername);
 if(!receiverimage.isEmpty())
@@ -105,7 +115,7 @@ messagesArrayList=new ArrayList<>();
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        messagesAdapter= new MessagesAdapter(this,messagesArrayList);
+        messagesAdapter= new MessagesAdapter(this,messagesArrayList,Specificchat.this);
         recyclerView.setAdapter(messagesAdapter);
 
 //
@@ -154,9 +164,9 @@ sendbutton.setOnClickListener(new View.OnClickListener() {
                 for (DataSnapshot snapshot1:snapshot.getChildren() ){
 
 
-                    Messages messages=snapshot1.getValue(Messages.class);
+                    Globalmessages messages=snapshot1.getValue(Globalmessages.class);
                     messagesArrayList.add(messages);
-
+messages.setDockey(snapshot1.getKey());
                     messagesAdapter.notifyDataSetChanged();
                 }
             }
@@ -191,5 +201,48 @@ sendbutton.setOnClickListener(new View.OnClickListener() {
         documentReference.update("status","offline");
 
         super.onStop();
+    }
+
+
+    public void makedeleteVisible(String key)
+    {
+
+        final String[] r = {""};
+        FirebaseDatabase.getInstance().getReference("chats").child(convID)
+                .child(key).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        Globalmessages globalmessages=snapshot.getValue(Globalmessages.class);
+r[0] =globalmessages.getMessage();
+
+                        Log.e("*", r[0]);
+                        if(!(r[0].equals("message got deleted"))) {
+                            deletechat.setVisibility(View.VISIBLE);
+                            deletechat.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Log.e("*", "deledet " + key);
+                                    FirebaseDatabase.getInstance().getReference("chats").child(convID)
+                                            .child(key).child("message").setValue("message got deleted");
+
+                                    deletechat.setVisibility(View.GONE);
+
+
+                                }
+                            });
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
     }
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lykasocialmediajava.Model.Globalmessages;
 import com.example.lykasocialmediajava.Model.Messages;
 import com.example.lykasocialmediajava.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,13 +30,13 @@ public class Globalmessagesadapter extends RecyclerView.Adapter {
 FirebaseFirestore firebaseFirestore;
 
     Context context;
-    ArrayList<Messages>messagesArrayList;
+    ArrayList<Globalmessages>messagesArrayList;
 
     int SENDERITEM=1;
     int RECEIVERITEM=2;
 
 
-    public Globalmessagesadapter(Context context, ArrayList<Messages> messagesArrayList) {
+    public Globalmessagesadapter(Context context, ArrayList<Globalmessages> messagesArrayList) {
         this.context = context;
         this.messagesArrayList = messagesArrayList;
         firebaseFirestore =FirebaseFirestore.getInstance();
@@ -71,7 +72,7 @@ FirebaseFirestore firebaseFirestore;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
 
-        Messages messages=messagesArrayList.get(position);
+        Globalmessages messages=messagesArrayList.get(position);
         if(holder.getClass()==SenderViewholder.class)
         {
             ((SenderViewholder) holder).message.setText(messages.getMessage());
@@ -84,7 +85,7 @@ FirebaseFirestore firebaseFirestore;
             ((ReceiverViewholder) holder).time.setText(messages.getCurrenttime());
         }
 
-        Log.e("*","99999999999999999999"+ messages.getSenderUID());
+        Log.e("*","99999999999999999999"+ messages.getDockey());
 
 
 firebaseFirestore.collection("users").whereEqualTo("userID",messages.getSenderUID())
@@ -120,7 +121,7 @@ if(task.isSuccessful())
 
     @Override
     public int getItemViewType(int position) {
-        Messages messages=messagesArrayList.get(position);
+        Globalmessages messages=messagesArrayList.get(position);
 
 
         if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(messages.getSenderUID()))
