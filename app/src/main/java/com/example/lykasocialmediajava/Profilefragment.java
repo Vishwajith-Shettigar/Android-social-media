@@ -135,13 +135,30 @@ followbtn=view.findViewById(R.id.followbtn);
             @Override
             public void onClick(View view) {
 
-                Map<String,Object> details=new HashMap<>();
-                details.put("fromUID",firebaseAuth.getUid());
-                details.put("toUID",UID);
-                details.put("convID",firebaseAuth.getUid()+""+UID);
+                firebaseFirestore.collection("chats").whereEqualTo("convID",UID+""+firebaseAuth.getUid())
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful())
+                                {
+                                    if(task.getResult().size()==0)
+                                    {
 
-                firebaseFirestore.collection("chats").document(firebaseAuth.getUid()+""+UID)
-                        .set(details);
+
+                                        Map<String,Object> details=new HashMap<>();
+                                        details.put("fromUID",firebaseAuth.getUid());
+                                        details.put("toUID",UID);
+                                        details.put("convID",firebaseAuth.getUid()+""+UID);
+
+                                        firebaseFirestore.collection("chats").document(firebaseAuth.getUid()+""+UID)
+                                                .set(details);
+                                    }
+                                }
+                            }
+                        });
+
+
+
 
                 Intent intent=new Intent(getActivity(),Chatactivity.class);
                 startActivity(intent);
