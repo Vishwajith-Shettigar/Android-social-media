@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.lykasocialmediajava.Adapters.Chatadapter;
 import com.example.lykasocialmediajava.Adapters.CommentsAdapter;
@@ -29,6 +32,7 @@ FirebaseFirestore firebaseFirestore;
 ArrayList<Chatmodel> chatmodels;
 Chatadapter chatadapter;
 
+ImageView globalchatbtn;
 
     RecyclerView chatsrecycler;
 
@@ -41,6 +45,13 @@ Chatadapter chatadapter;
         firebaseAuth=FirebaseAuth.getInstance();
         chatmodels=new ArrayList<>();
         chatadapter=new Chatadapter(chatmodels,this);
+        globalchatbtn=findViewById(R.id.globalchatbtn);
+        globalchatbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Chatactivity.this,Globalchat.class));
+            }
+        });
 
 Log.e("*","n chats" );
         getData();

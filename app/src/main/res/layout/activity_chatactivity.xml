@@ -39,6 +39,16 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/likesbackbtn"
                 />
+            <ImageView
+                android:id="@+id/globalchatbtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/globechat"
+                android:layout_centerVertical="true"
+android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+
+                />
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
