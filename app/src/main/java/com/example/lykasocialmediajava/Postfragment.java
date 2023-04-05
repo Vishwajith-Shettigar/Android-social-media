@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.lykasocialmediajava.Adapters.PostAdapter;
 import com.example.lykasocialmediajava.Model.PostModel;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,10 @@ public class Postfragment extends Fragment {
 
 RecyclerView postfragrecyclerview;
 Bundle bundle;
+TextView toolbartext;
+
 ArrayList<PostModel> arrayList;
+boolean isBookmark=false;
 
 
     @Override
@@ -37,8 +43,20 @@ ArrayList<PostModel> arrayList;
 arrayList=new ArrayList<>();
 
         arrayList=bundle.getParcelableArrayList("arraylist");
+        isBookmark=bundle.getBoolean("isBookmark");
 
 
+        toolbartext=view.findViewById(R.id.toolbartext);
+
+
+        if(isBookmark)
+        {
+            toolbartext.setText("Bookmark");
+        }
+        else{
+            toolbartext.setText("Post");
+
+        }
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         postfragrecyclerview.setLayoutManager(linearLayoutManager);
 

@@ -42,18 +42,18 @@
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="75dp"
-                android:layout_toLeftOf="@+id/profilechaticon"
+                android:layout_toLeftOf="@+id/profilebookmarkbtn"
                 android:src="@drawable/addnewpost"
 
 
                 />
             <ImageView
-                android:id="@+id/profilechaticon"
+                android:id="@+id/profilebookmarkbtn"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="25dp"
-                android:src="@drawable/newchaticon"
+                android:src="@drawable/bookmarkbtn"
 
 
                 />

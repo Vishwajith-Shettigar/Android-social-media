@@ -70,6 +70,9 @@ MaterialButton followbtn,messagebtn;
     RecyclerView profilepostrecyclerview;
 
 Searchfargadapter searchfargadapter;
+ImageView profilebookmarkbtn;
+
+    ArrayList<PostModel>bookmarkpost;
 
 
     @Override
@@ -80,6 +83,8 @@ Searchfargadapter searchfargadapter;
         View view= inflater.inflate(R.layout.fragment_profilefragment, container, false);
 Bundle bundle;
         Owner= true;
+         bookmarkpost=new ArrayList<>();
+
         postModelArrayList=new ArrayList<>();
 
         bundle = getArguments();
@@ -90,6 +95,7 @@ Bundle bundle;
 
 
 
+        profilebookmarkbtn=view.findViewById(R.id.profilebookmarkbtn);
 
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseFirestore=FirebaseFirestore.getInstance();
@@ -110,6 +116,7 @@ followbtn=view.findViewById(R.id.followbtn);
 
 
             getData();
+            getBookmarkData();
 
 
 
@@ -129,6 +136,37 @@ followbtn=view.findViewById(R.id.followbtn);
 
         getPosts();
 
+
+        profilebookmarkbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+Log.e("*","bookmark size---"+ bookmarkpost.size());
+if(bookmarkpost.size()!=0) {
+    FragmentManager fragmentManager =
+            (getActivity()).getSupportFragmentManager();
+
+    Bundle bundle = new Bundle();
+
+    bundle.putParcelableArrayList("arraylist", bookmarkpost);
+    bundle.putBoolean("isBookmark",true);
+
+
+    Postfragment postfragment = new Postfragment();
+    postfragment.setArguments(bundle);
+    FragmentTransaction fragmentTransaction =
+            fragmentManager.beginTransaction();
+
+    fragmentTransaction.replace
+            (R.id.fragment_contnair, postfragment).addToBackStack("tag").commit();
+
+
+}
+
+
+
+            }
+        });
 
 
         messagebtn.setOnClickListener(new View.OnClickListener() {
@@ -272,6 +310,87 @@ followbtn.setOnClickListener(new View.OnClickListener() {
 
 
         return  view;
+    }
+
+    public void getBookmarkData() {
+  bookmarkpost=new ArrayList<>();
+
+
+        FirebaseFirestore.getInstance().collection("bookmark").whereEqualTo("userID",firebaseAuth.getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if(task.isSuccessful())
+                        {
+
+                            long n=task.getResult().size();
+                            ArrayList<DocumentSnapshot> documentSnapshots= (ArrayList<DocumentSnapshot>) task.getResult()
+                                    .getDocuments();
+
+                            for (long i=0;i<n;i++)
+                            {
+                                DocumentSnapshot documentSnapshot= (DocumentSnapshot) documentSnapshots.get((int) i);
+                                Map<String,Object> bookmark=documentSnapshot.getData();
+                                Log.e("*","bookmark ---"+bookmark.get("postID").toString());
+
+                                FirebaseFirestore.getInstance().collection("posts").whereEqualTo("post_id",bookmark.get("postID").toString())
+
+                                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                                if(task.isSuccessful())
+                                                {
+
+                                                    Map<String,Object>postdetails=task.getResult().getDocuments().get(0).getData();
+
+                                                    FirebaseFirestore.getInstance().collection("users").whereEqualTo("userID",postdetails.get("userID").toString())
+                                                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
+                                                                    if(task.isSuccessful())
+                                                                    {
+
+                                                                        Map<String,Object>user=task.getResult().getDocuments().get(0).getData();
+
+                                                                        PostModel postModel=new PostModel(user.get("userID").toString(),user.get("username").toString(),user.get("imageurl").toString(),postdetails.get("post_id").toString(),
+
+                                                                                postdetails.get("postimage").toString(),postdetails.get("posttext").toString(),
+
+                                                                                postdetails.get("timetsamp").toString(),
+                                                                                (boolean)postdetails.get("hideLike"),(boolean)postdetails.get("hidecomt"),
+                                                                                (boolean)postdetails.get("isAnony")
+
+
+                                                                        );
+
+                                                                        bookmarkpost.add(postModel);
+                                                                        Log.e("*","hiiiiiiii--------------- booikmark"+postModel.getPtext());
+                                                                        Log.e("*","hiiiiiiii--------------- booikmark-->"+ bookmarkpost.size());
+
+                                                                    }
+
+                                                                }
+                                                            });
+
+
+                                                }
+                                            }
+                                        });
+
+
+
+
+                            }
+
+
+                        }
+                    }
+                });
+
     }
 
     public void getPosts()
@@ -505,6 +624,7 @@ Followings.add((String) documentSnapshot1.getData().get("followingID"));
         Bundle bundle = new Bundle();
 
         bundle.putParcelableArrayList("arraylist",  postModelArrayList);
+        bundle.putBoolean("isBookmark",false);
 
         Postfragment postfragment = new Postfragment();
         postfragment.setArguments(bundle);
