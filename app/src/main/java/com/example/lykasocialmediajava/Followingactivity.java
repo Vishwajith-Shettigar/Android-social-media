@@ -102,7 +102,7 @@ for(int i=0;i<followings.size();i++) {
 
     }
     private void setrecyclerview() {
-        Searchuseradapter searchuseradapter=new Searchuseradapter(searchusermodelArrayList,getApplicationContext());
+        Searchuseradapter searchuseradapter=new Searchuseradapter(searchusermodelArrayList,getApplicationContext(),Followingactivity.this);
 
 
         followingrecyclerview.setHasFixedSize(true);

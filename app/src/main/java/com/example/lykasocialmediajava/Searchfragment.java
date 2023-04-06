@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.lykasocialmediajava.Adapters.PostAdapter;
 import com.example.lykasocialmediajava.Adapters.Searchfargadapter;
@@ -53,6 +54,8 @@ FirebaseFirestore firebaseFirestore;
     ArrayList<PostModel>postModelArrayList;
 Searchfargadapter searchfargadapter;
 RecyclerView searchrecyclerview;
+LinearLayout linearserch;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +67,7 @@ RecyclerView searchrecyclerview;
         chaticon=view.findViewById(R.id.chaticon);
         newposticon=view.findViewById(R.id.newposticon);
         searchrecyclerview=view.findViewById(R.id.searchrecyclerview);
+        linearserch=view.findViewById(R.id.linearserch);
 
         firebaseAuth= FirebaseAuth.getInstance();
         firebaseFirestore= FirebaseFirestore.getInstance();
@@ -76,13 +80,13 @@ RecyclerView searchrecyclerview;
         (searchrecyclerview).setHasFixedSize(true);
 
 //        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,1);
-FlexboxLayoutManager flexboxLayoutManager=new FlexboxLayoutManager(getActivity());
-
-        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_END);
-
-
-flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
-        searchrecyclerview.setLayoutManager(flexboxLayoutManager);
+//FlexboxLayoutManager flexboxLayoutManager=new FlexboxLayoutManager(getActivity());
+//
+//        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_END);
+//
+//
+//flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        searchrecyclerview.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         searchfargadapter=new Searchfargadapter(getActivity(),postModelArrayList,Searchfragment.this);
        searchrecyclerview.setAdapter(searchfargadapter);
 
@@ -112,6 +116,13 @@ flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
                 startActivity(new Intent(getActivity(),Innersearchactivity.class));
 
 
+            }
+        });
+
+        linearserch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),Innersearchactivity.class));
             }
         });
 

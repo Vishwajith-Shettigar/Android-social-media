@@ -29,6 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.guieffect.qual.UI;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +46,11 @@ Toolbar toolbar;
     PostAdapter postAdapter;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
+  public   Homefragment()
+    {
+
+
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -175,6 +182,7 @@ QuerySnapshot querySnapshot=task.getResult();
     }
     public void gotToprofile(String UID){
 
+        Log.e("*","hgiii  +"+ UID);
         FragmentManager fragmentManager =
                 (getActivity()). getSupportFragmentManager();
 
@@ -182,6 +190,7 @@ QuerySnapshot querySnapshot=task.getResult();
 
         bundle.putBoolean("owner",  false);
         bundle.putString("userID",UID);
+
 
         Profilefragment profilefragment = new Profilefragment();
         profilefragment.setArguments(bundle);

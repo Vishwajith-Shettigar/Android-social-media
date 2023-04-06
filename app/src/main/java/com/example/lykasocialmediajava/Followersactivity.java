@@ -103,7 +103,7 @@ public class Followersactivity extends AppCompatActivity {
 
     }
     private void setrecyclerview() {
-        Searchuseradapter searchuseradapter=new Searchuseradapter(searchusermodelArrayList,getApplicationContext());
+        Searchuseradapter searchuseradapter=new Searchuseradapter(searchusermodelArrayList,this,Followersactivity.this);
 
 
         followerrecycler.setHasFixedSize(true);

@@ -3,9 +3,12 @@ package com.example.lykasocialmediajava;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +63,7 @@ arrayList=new ArrayList<>();
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         postfragrecyclerview.setLayoutManager(linearLayoutManager);
 
-        PostAdapter postAdapter=new PostAdapter(arrayList,getActivity());
+        PostAdapter postAdapter=new PostAdapter(arrayList,getActivity(),Postfragment.this);
 
 
 
@@ -72,5 +75,32 @@ arrayList=new ArrayList<>();
 
 
         return  view;
+    }
+    public void gotToprofile(String UID){
+
+        Log.e("*","hgiii  +"+ UID);
+        FragmentManager fragmentManager =
+                (getActivity()). getSupportFragmentManager();
+
+        Bundle bundle = new Bundle();
+
+        bundle.putBoolean("owner",  false);
+        bundle.putString("userID",UID);
+
+
+        Profilefragment profilefragment = new Profilefragment();
+        profilefragment.setArguments(bundle);
+        FragmentTransaction fragmentTransaction =
+                fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace
+                (R.id.fragment_contnair, profilefragment).addToBackStack( "tag" ).commit();
+
+
+
+
+
+
+
     }
 }

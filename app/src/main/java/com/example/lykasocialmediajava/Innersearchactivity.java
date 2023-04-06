@@ -3,29 +3,31 @@ package com.example.lykasocialmediajava;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.lykasocialmediajava.Adapters.LikesAdapter;
 import com.example.lykasocialmediajava.Adapters.Searchuseradapter;
 import com.example.lykasocialmediajava.Model.CommentsModel;
-import com.example.lykasocialmediajava.Model.LikesModel;
+import com.example.lykasocialmediajava.Model.Getmaincontext;
 import com.example.lykasocialmediajava.Model.Searchusermodel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.guieffect.qual.UI;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class Innersearchactivity extends AppCompatActivity {
     RecyclerView searchinnerrecycler;
@@ -123,7 +125,7 @@ String searchUsername;
 
     }
     private void setrecyclerview() {
-        Searchuseradapter searchuseradapter=new Searchuseradapter(searchusermodelArrayList,getApplicationContext());
+        Searchuseradapter searchuseradapter=new Searchuseradapter(searchusermodelArrayList,this,Innersearchactivity.this);
 
 
         searchinnerrecycler.setHasFixedSize(true);
@@ -132,6 +134,20 @@ String searchUsername;
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         searchinnerrecycler.setLayoutManager(linearLayoutManager);
         searchinnerrecycler.setAdapter(searchuseradapter);
+    }
+    public void gotToprofile(String UID){
+
+
+
+        Intent intent = new Intent(Innersearchactivity.this, MainActivity.class);
+        intent.putExtra("replaceFragment", true);
+        intent.putExtra("UID",UID);
+        startActivity(intent);
+
+
+
+
+
     }
 
 

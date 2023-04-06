@@ -6,6 +6,7 @@
     android:background="@color/white"
     android:padding="6dp"
     android:id="@+id/searchla"
+    android:elevation="3dp"
 
     >
     <RelativeLayout
@@ -66,11 +67,5 @@
 
         </RelativeLayout>
     </RelativeLayout>
-    <RelativeLayout
 
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#797575"
-        android:layout_below="@+id/relativelayoutofuserandtext"
-        />
 </RelativeLayout>

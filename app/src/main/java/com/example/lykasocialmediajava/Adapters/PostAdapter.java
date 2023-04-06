@@ -16,9 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lykasocialmediajava.Commentactivity;
+import com.example.lykasocialmediajava.Explorefragment;
 import com.example.lykasocialmediajava.Homefragment;
 import com.example.lykasocialmediajava.Likesactivity;
 import com.example.lykasocialmediajava.Model.PostModel;
+import com.example.lykasocialmediajava.Postfragment;
 import com.example.lykasocialmediajava.Postmenubottomsheet;
 import com.example.lykasocialmediajava.R;
 import com.example.lykasocialmediajava.Usermodel;
@@ -51,13 +53,29 @@ public class PostAdapter extends RecyclerView.Adapter {
     ArrayList<PostModel>Postarraylist;
 
   Context context;
-  Homefragment homefragment;
+  Homefragment homefragment=null;
+  Explorefragment explorefragment=null;
+  Postfragment postfragment=null;
 
     public PostAdapter(ArrayList<PostModel> postarraylist, Context context,Homefragment homefragment) {
         Postarraylist = postarraylist;
         this.context = context;
         Log.e("*","inadapter");
     this.homefragment    =homefragment;
+
+    }
+    public PostAdapter(ArrayList<PostModel> postarraylist, Context context,Explorefragment explorefragment) {
+        Postarraylist = postarraylist;
+        this.context = context;
+        Log.e("*","inadapter");
+        this.explorefragment    =explorefragment;
+
+    }
+    public PostAdapter(ArrayList<PostModel> postarraylist, Context context,Postfragment postfragment) {
+        Postarraylist = postarraylist;
+        this.context = context;
+        Log.e("*","inadapter");
+        this.postfragment    =postfragment;
 
     }
     public PostAdapter(ArrayList<PostModel> postarraylist, Context context) {
@@ -292,7 +310,18 @@ notiref.document(postModel.getUid()+""+postModel.getPid()+"").set(detailsnoti);
         ( (viewholder)holder).userdp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-homefragment.gotToprofile(postModel.getUid());
+
+                if(homefragment!=null) {
+                    homefragment.gotToprofile(postModel.getUid());
+                }
+                else if (explorefragment!=null) {
+
+                    explorefragment.gotToprofile(postModel.getUid());
+                }
+                else if(postfragment!=null)
+                {
+                    postfragment.gotToprofile(postModel.getUid());
+                }
             }
         });
 

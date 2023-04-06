@@ -6,11 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lykasocialmediajava.Followersactivity;
+import com.example.lykasocialmediajava.Followingactivity;
+import com.example.lykasocialmediajava.Innersearchactivity;
 import com.example.lykasocialmediajava.Model.Searchusermodel;
 import com.example.lykasocialmediajava.R;
 import com.squareup.picasso.Picasso;
@@ -21,11 +25,26 @@ public class Searchuseradapter extends RecyclerView.Adapter {
 
     ArrayList<Searchusermodel>Arraysearchusermodels;
     Context context;
+    Innersearchactivity innersearchactivity;
+    Followersactivity followersactivity;
+    Followingactivity followingactivity;
 
-    public Searchuseradapter(ArrayList<Searchusermodel> searchusermodels, Context context) {
+    public Searchuseradapter(ArrayList<Searchusermodel> searchusermodels, Context context, Innersearchactivity innersearchactivity) {
         this.Arraysearchusermodels = searchusermodels;
         this.context = context;
+        this.innersearchactivity=innersearchactivity;
     }
+    public Searchuseradapter(ArrayList<Searchusermodel> searchusermodels, Context context, Followersactivity followersactivity) {
+        this.Arraysearchusermodels = searchusermodels;
+        this.context = context;
+        this.followersactivity=followersactivity;
+    }
+    public Searchuseradapter(ArrayList<Searchusermodel> searchusermodels, Context context, Followingactivity followingactivity) {
+        this.Arraysearchusermodels = searchusermodels;
+        this.context = context;
+        this.followingactivity=followingactivity;
+    }
+
 
     @NonNull
     @Override
@@ -48,6 +67,17 @@ public class Searchuseradapter extends RecyclerView.Adapter {
 
         ((viewholder)holder).searchname.setText(searchuser.getName());
 
+        ((viewholder)holder).searchla.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                innersearchactivity.gotToprofile(searchuser.getUserID());
+            }
+
+        });
+
+
+
+
 
     }
 
@@ -62,6 +92,8 @@ public class Searchuseradapter extends RecyclerView.Adapter {
 ImageView userimagesearch;
 TextView searchusername;
 TextView searchname;
+RelativeLayout searchla;
+
 
 
         public viewholder(@NonNull View itemView) {
@@ -70,6 +102,7 @@ TextView searchname;
             userimagesearch=itemView.findViewById(R.id.userimagesearch);
             searchusername =itemView.findViewById(R.id.searchusername);
             searchname=itemView.findViewById(R.id.searchname);
+            searchla=itemView.findViewById(R.id.searchla);
 
 
 

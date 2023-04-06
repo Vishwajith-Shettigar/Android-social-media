@@ -2,11 +2,13 @@ package com.example.lykasocialmediajava.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
 
@@ -67,6 +69,10 @@ Profilefragment profilefragment=null;
 
         }else{
 
+            DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+            float dpHeight = displayMetrics.heightPixels ;
+            float dpWidth = (displayMetrics.widthPixels/2)-20 ;
+
             if(postModel.getPimage().contains("mp4"))
             {
                 MediaController mediaController = new MediaController(context);
@@ -75,6 +81,10 @@ Profilefragment profilefragment=null;
 
                 ExoPlayer player = new ExoPlayer.Builder(context).build();
                 ((viewholder)holder).videoplayer.setPlayer(player);
+//                ((viewholder)holder).videoplayer.setMinimumWidth((int) (dpWidth/2));
+                ((viewholder)holder).videoplayer.requestLayout();
+//                ((viewholder)holder).videoplayer.getLayoutParams().width = (int) (dpWidth);
+
                 MediaItem mediaItem = MediaItem.fromUri(Uri.parse(postModel.getPimage()));
 
                 player.addMediaItem(mediaItem);
@@ -88,6 +98,10 @@ Profilefragment profilefragment=null;
 
                 Log.e("*",postModel.getPimage());
                 ((viewholder) holder).videoplayer.setVisibility(View.GONE);
+//                ((viewholder)holder).imageView.setMinimumWidth((int) (dpWidth/2));
+                ((viewholder)holder).imageView.requestLayout();
+//                ((viewholder)holder).imageView.getLayoutParams().width = (int) (dpWidth);
+
                 Picasso.get().load(postModel.getPimage()).into(((viewholder) holder).imageView);
 
             }

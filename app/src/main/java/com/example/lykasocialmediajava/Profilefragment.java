@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.lykasocialmediajava.Adapters.PostAdapter;
 import com.example.lykasocialmediajava.Adapters.Searchfargadapter;
@@ -123,13 +124,11 @@ followbtn=view.findViewById(R.id.followbtn);
         (profilepostrecyclerview).setHasFixedSize(true);
 
 //        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,1);
-        FlexboxLayoutManager flexboxLayoutManager=new FlexboxLayoutManager(getActivity());
-
-        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_END);
 
 
-        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
-        profilepostrecyclerview.setLayoutManager(flexboxLayoutManager);
+
+        profilepostrecyclerview.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+
         searchfargadapter=new Searchfargadapter(getActivity(),postModelArrayList,Profilefragment.this);
         profilepostrecyclerview.setAdapter(searchfargadapter);
 

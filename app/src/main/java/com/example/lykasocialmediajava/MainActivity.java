@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.lykasocialmediajava.Model.Getmaincontext;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -45,6 +46,10 @@ public class MainActivity extends AppCompatActivity   {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 // initializing
+        Getmaincontext.setContext(MainActivity.this);
+
+
+
         bottomNavigationView=findViewById(R.id.bottom_navigation);
 
         firebaseAuth=FirebaseAuth.getInstance();
@@ -52,16 +57,43 @@ public class MainActivity extends AppCompatActivity   {
 
 
         // setting default fragment homfragment
-        FragmentManager fragmentManager =
-                getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction =
-                fragmentManager.beginTransaction();
+
+
+
+
+        boolean replaceFragment = getIntent().getBooleanExtra("replaceFragment", false);
+
+        if (replaceFragment) {
+            Log.e("*","we are dumb");
+            Log.e("*","we are dumb");
+            FragmentManager fragmentManager =
+                    getSupportFragmentManager();
+
+            Bundle bundle = new Bundle();
+
+            bundle.putBoolean("owner",  false);
+            bundle.putString("userID",getIntent().getStringExtra("UID"));
+
+
+
+            Profilefragment profilefragment = new Profilefragment();
+            profilefragment.setArguments(bundle);
+            FragmentTransaction fragmentTransaction =
+                    fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace
+                    (R.id.fragment_contnair, profilefragment).addToBackStack( "tag" ).commit();
+
+        }else{
+
+            FragmentManager fragmentManager =
+                    getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction =
+                    fragmentManager.beginTransaction();
 
             fragmentTransaction.replace
                     (R.id.fragment_contnair, new Homefragment()).commit();
-
-
-
+        }
 
 
         // *********all about bottom navigationview and its menu  and fragment*************
@@ -259,6 +291,34 @@ break;
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
         DocumentReference documentReference=firebaseFirestore.collection("users").document(firebaseAuth.getUid());
         documentReference.update("status","offline");
+    }
+    public void gotToprofile(String UID){
+
+
+
+        FragmentManager fragmentManager =
+                getSupportFragmentManager();
+
+        Bundle bundle = new Bundle();
+
+        bundle.putBoolean("owner",  false);
+        bundle.putString("userID",UID);
+
+
+
+        Profilefragment profilefragment = new Profilefragment();
+        profilefragment.setArguments(bundle);
+        FragmentTransaction fragmentTransaction =
+                fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace
+                (R.id.fragment_contnair, profilefragment).addToBackStack( "tag" ).commit();
+
+
+
+
+
+
     }
 
 
