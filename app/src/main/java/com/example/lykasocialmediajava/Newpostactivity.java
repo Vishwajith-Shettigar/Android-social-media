@@ -305,7 +305,7 @@ else{
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
 
 
-        details.put("timetsamp",    simpleDateFormat.format(calendar.getTime()).toString());
+        details.put("timetsamp",    new Date().toString());
 
         if(imagepath!=null)
       {

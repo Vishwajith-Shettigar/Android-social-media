@@ -2,9 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/messageback"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-android:paddingBottom="30dp"
+    android:paddingBottom="30dp"
+    android:background="@color/white"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+
     >
 
     <RelativeLayout

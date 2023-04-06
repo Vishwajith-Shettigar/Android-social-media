@@ -313,10 +313,11 @@ followbtn.setOnClickListener(new View.OnClickListener() {
     }
 
     public void getBookmarkData() {
+
   bookmarkpost=new ArrayList<>();
 
 
-        FirebaseFirestore.getInstance().collection("bookmark").whereEqualTo("userID",firebaseAuth.getUid())
+  FirebaseFirestore.getInstance().collection("bookmark").whereEqualTo("userID",firebaseAuth.getUid())
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

@@ -34,8 +34,15 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class PostAdapter extends RecyclerView.Adapter {
@@ -79,7 +86,18 @@ public class PostAdapter extends RecyclerView.Adapter {
         PostModel postModel=Postarraylist.get(position);
 
 
+        DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+        Date cDate;
+        try {
+             cDate = df.parse(postModel.getTtime());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
+        String ago = prettyTime.format(cDate);
 
+
+        ((viewholder) holder).time.setText(ago);
         // set ishide is comt
 
         if(postModel.gethideLike())
@@ -340,7 +358,7 @@ public  void setLikescount(RecyclerView.ViewHolder holder,PostModel postModel)
 
     {
         ImageView userdp,postimage,likebtn,commentbtn;
-        TextView username,likecount,comcount,posttext;
+        TextView username,likecount,comcount,posttext,time;
         ImageView threedot;
         PlayerView postvideo;
 
@@ -358,6 +376,8 @@ boolean liked;
             commentbtn=itemView.findViewById(R.id.commentbtn);
             likecount=itemView.findViewById(R.id.likescount);
             comcount=itemView.findViewById(R.id.comcount);
+            time=itemView.findViewById(R.id.time);
+
             liked=false;
 nolikes="";
 

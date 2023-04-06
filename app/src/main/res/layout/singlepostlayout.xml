@@ -3,6 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_marginTop="20dp"
+    android:padding="5dp"
+    android:background="@drawable/singlepostback"
+    android:elevation="6dp"
 
     >
 
@@ -27,6 +31,7 @@ android:layout_marginLeft="15dp"
     android:id="@+id/cardviewdp"
  android:layout_centerVertical="true"
     android:layout_marginRight="15dp"
+    android:elevation="6dp"
     >
 <ImageView
     android:id="@+id/userdp"
@@ -41,8 +46,16 @@ android:scaleType="centerCrop"
 
 </androidx.cardview.widget.CardView>
 
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_toRightOf="@id/cardviewdp"
+android:id="@+id/relativeusert"
+    android:gravity="center"
+    >
 
     <TextView
+
         android:textColor="@color/black"
         android:layout_marginRight="10dp"
         android:id="@+id/postusername"
@@ -50,9 +63,18 @@ android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Vishwajith shettigar"
-        android:layout_toRightOf="@id/cardviewdp"
 
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_below="@+id/postusername"
+android:id="@+id/time"
+        android:text="two minutes ago"
+        android:textColor="#999595"
+        />
+</RelativeLayout>
+
 
     <ImageView
         android:id="@+id/threedot"
@@ -61,7 +83,7 @@ android:scaleType="centerCrop"
 android:src="@drawable/threedot"
 android:layout_marginLeft="-40dp"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/postusername"
+        android:layout_toRightOf="@id/relativeusert"
 
         />
 </RelativeLayout>
@@ -70,6 +92,7 @@ android:layout_marginLeft="-40dp"
         android:layout_height="wrap_content"
 android:layout_gravity="center"
         android:gravity="center"
+        android:paddingTop="20dp"
         >
 
 
@@ -80,6 +103,7 @@ android:layout_gravity="center"
             android:id="@+id/postvideo"
 
             />
+
         <ImageView
             android:id="@+id/postimage"
             android:layout_width="match_parent"
@@ -166,8 +190,8 @@ fine lets talk tomorrow"
 </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-android:background="#7C7979"
+        android:layout_height="0dp"
+android:background="#D8D2D2"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         />

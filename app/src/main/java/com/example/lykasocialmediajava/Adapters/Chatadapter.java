@@ -3,6 +3,7 @@ package com.example.lykasocialmediajava.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ String searchID;
         final String[] username = new String[1];
         final String[] image = new String[1];
         final String[] status = new String[1];
-
+        Log.e("*","search id --"+searchID);
 
         firebaseFirestore.collection("users").whereEqualTo("userID",searchID)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
