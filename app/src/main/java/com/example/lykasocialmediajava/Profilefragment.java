@@ -291,7 +291,8 @@ followbtn.setOnClickListener(new View.OnClickListener() {
                                 detailsnoti.put("fromImage",Usermodel.getImageurl());
 
                                 detailsnoti.put("text",Usermodel.getUsername() +" followed you");
-
+                                detailsnoti.put("seen",false);
+                                detailsnoti.put("notiID",firebaseAuth.getUid()+""+UID+"");
                                 notiref.document(firebaseAuth.getUid()+""+UID+"").set(detailsnoti);
 
 

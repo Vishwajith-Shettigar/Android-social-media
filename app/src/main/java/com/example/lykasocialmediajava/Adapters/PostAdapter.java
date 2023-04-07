@@ -298,6 +298,9 @@ Log.e("*",postModel.getPimage());
                     detailsnoti.put("fromImage",Usermodel.getImageurl());
 
                     detailsnoti.put("text",Usermodel.getUsername() +" Liked your post");
+                    detailsnoti.put("seen",false);
+                    detailsnoti.put("notiID",postModel.getUid()+""+postModel.getPid()+"");
+
 
 notiref.document(postModel.getUid()+""+postModel.getPid()+"").set(detailsnoti);
 

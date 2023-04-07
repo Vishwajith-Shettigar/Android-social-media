@@ -69,7 +69,7 @@ commentsModelArrayList=new ArrayList<>();
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-         commentsAdapter=new CommentsAdapter(this,commentsModelArrayList);
+         commentsAdapter=new CommentsAdapter(this,commentsModelArrayList,Commentactivity.this);
         recyclerView.setAdapter(commentsAdapter);
 
 
@@ -188,9 +188,23 @@ comdetails.put("comID",comid);
 
     }
     private void setrecyclerview() {
-        CommentsAdapter commentsAdapter=new CommentsAdapter(this,commentsModelArrayList);
+        CommentsAdapter commentsAdapter=new CommentsAdapter(this,commentsModelArrayList,Commentactivity.this);
         recyclerView.setAdapter(commentsAdapter);
     }
 
+    public void gotToprofile(String UID){
+
+
+
+        Intent intent = new Intent(Commentactivity.this, MainActivity.class);
+        intent.putExtra("replaceFragment", true);
+        intent.putExtra("UID",UID);
+        startActivity(intent);
+
+
+
+
+
+    }
 
 }

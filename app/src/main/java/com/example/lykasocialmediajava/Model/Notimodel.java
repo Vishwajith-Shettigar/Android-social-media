@@ -1,14 +1,31 @@
 package com.example.lykasocialmediajava.Model;
 
 public class Notimodel {
-    String fromuid,touid,fromusername,fromimage,text;
+    String fromuid,touid,fromusername,fromimage,text,notiID;
+    boolean seen;
 
-    public Notimodel(String fromuid, String touid, String fromusername, String fromimage, String text) {
+    public Notimodel(String notiID,String fromuid, String touid, String fromusername, String fromimage, String text) {
         this.fromuid = fromuid;
         this.touid = touid;
         this.fromusername = fromusername;
         this.fromimage = fromimage;
         this.text = text;
+        this.seen=false;
+        this.notiID=notiID;
+
+
+    }
+
+    public String getNotiID() {
+        return notiID;
+    }
+
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
     }
 
     public String getFromuid() {

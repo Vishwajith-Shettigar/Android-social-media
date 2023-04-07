@@ -113,5 +113,19 @@ for(int i=0;i<followings.size();i++) {
         followingrecyclerview.setAdapter(searchuseradapter);
     }
 
+    public void gotToprofile(String UID){
+
+
+
+        Intent intent = new Intent(Followingactivity.this, MainActivity.class);
+        intent.putExtra("replaceFragment", true);
+        intent.putExtra("UID",UID);
+        startActivity(intent);
+
+
+
+
+
+    }
 
 }

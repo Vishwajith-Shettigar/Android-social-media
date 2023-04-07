@@ -63,6 +63,8 @@ Toolbar toolbar;
 firebaseAuth=FirebaseAuth.getInstance();
 firebaseFirestore=FirebaseFirestore.getInstance();
 postModelArrayList=new ArrayList<>();
+        ((MainActivity)getActivity()).getNotificationNO();
+
 
 fetchPosts();
 //        PostModel postModel=new PostModel("dfewfew","ger","https://firebasestorage.googleapis.com/v0/b/lykasocialmedia.appspot.com/o/EWERiSotLYed6BaFMLAtPcO0oc73%2Fprofilepicture%2Fprofilepic?alt=media&token=cbcefffe-a3ce-4fa5-9265-952899929560","dwqdwqd",
@@ -207,4 +209,5 @@ QuerySnapshot querySnapshot=task.getResult();
 
 
     }
+
 }

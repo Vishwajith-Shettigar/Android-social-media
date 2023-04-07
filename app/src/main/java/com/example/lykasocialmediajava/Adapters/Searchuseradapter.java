@@ -25,9 +25,9 @@ public class Searchuseradapter extends RecyclerView.Adapter {
 
     ArrayList<Searchusermodel>Arraysearchusermodels;
     Context context;
-    Innersearchactivity innersearchactivity;
-    Followersactivity followersactivity;
-    Followingactivity followingactivity;
+    Innersearchactivity innersearchactivity=null;
+    Followersactivity followersactivity=null;
+    Followingactivity followingactivity=null;
 
     public Searchuseradapter(ArrayList<Searchusermodel> searchusermodels, Context context, Innersearchactivity innersearchactivity) {
         this.Arraysearchusermodels = searchusermodels;
@@ -70,7 +70,16 @@ public class Searchuseradapter extends RecyclerView.Adapter {
         ((viewholder)holder).searchla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(innersearchactivity!=null)
                 innersearchactivity.gotToprofile(searchuser.getUserID());
+                else if (followingactivity!=null) {
+                 followingactivity.gotToprofile(searchuser.getUserID());
+
+                } else if (followersactivity!=null) {
+
+                    followersactivity.gotToprofile(searchuser.getUserID());
+                }
             }
 
         });

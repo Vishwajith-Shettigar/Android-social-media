@@ -97,7 +97,7 @@ LinearLayout linearserch;
         newposticon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),Newpostactivity.class));
+                startActivity(new Intent(getActivity(),Newpostactivity.class).putExtra("isEdit","false"));
             }
         });
 

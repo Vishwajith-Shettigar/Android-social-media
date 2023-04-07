@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity   {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
 
-
+    com.google.android.material.badge.BadgeDrawable badge;
 
 
     @Override
@@ -100,12 +101,13 @@ public class MainActivity extends AppCompatActivity   {
 
 
 
-        com.google.android.material.badge.BadgeDrawable badge = bottomNavigationView.getOrCreateBadge(R.id.favouritemenu);
-        badge.setVisible(true);
-        badge.setNumber(10);
+      badge = bottomNavigationView.getOrCreateBadge(R.id.favouritemenu);
+        badge.setVisible(false);
+        badge.setNumber(0);
 
 //        badge.clearNumber();
 //        badge.setVisible(false);
+
 
 
 
@@ -242,6 +244,7 @@ break;
         if(firebaseAuth.getCurrentUser()!=null)
         {
 
+
             DocumentReference documentReference=firebaseFirestore.collection("users").document(firebaseAuth.getUid());
 
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -283,6 +286,8 @@ break;
         DocumentReference documentReference=firebaseFirestore.collection("users").document(firebaseAuth.getUid());
         documentReference.update("status","online");
 
+
+
     }
 
     @Override
@@ -292,34 +297,36 @@ break;
         DocumentReference documentReference=firebaseFirestore.collection("users").document(firebaseAuth.getUid());
         documentReference.update("status","offline");
     }
-    public void gotToprofile(String UID){
 
 
+    public  void  getNotificationNO() {
+        Log.e("+","called");
+        final boolean[] suc = {false};
+        firebaseFirestore.collection("Notification").whereEqualTo("toUserid", firebaseAuth.getUid()).whereEqualTo("seen", false)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-        FragmentManager fragmentManager =
-                getSupportFragmentManager();
+                        if (task.isSuccessful()) {
+                            Log.e("+","size()------------>"+task.getResult().size());
+                            if(task.getResult().size()>0) {
+                                badge.setVisible(true);
+                                badge.setNumber(task.getResult().size());
+                                suc[0] =true;
+                            }
+                            else {
 
-        Bundle bundle = new Bundle();
+                                badge.setVisible(false);
+                                badge.setNumber(0);
+                            }
+                        }
 
-        bundle.putBoolean("owner",  false);
-        bundle.putString("userID",UID);
-
-
-
-        Profilefragment profilefragment = new Profilefragment();
-        profilefragment.setArguments(bundle);
-        FragmentTransaction fragmentTransaction =
-                fragmentManager.beginTransaction();
-
-        fragmentTransaction.replace
-                (R.id.fragment_contnair, profilefragment).addToBackStack( "tag" ).commit();
-
-
-
-
-
-
+                    }
+                });
+        if(suc[0] ==false)
+        {
+            badge.setVisible(false);
+            badge.setNumber(0);
+        }
     }
-
-
 }

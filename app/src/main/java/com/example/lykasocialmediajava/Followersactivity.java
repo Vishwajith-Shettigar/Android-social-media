@@ -113,7 +113,20 @@ public class Followersactivity extends AppCompatActivity {
         followerrecycler.setLayoutManager(linearLayoutManager);
         followerrecycler.setAdapter(searchuseradapter);
     }
+    public void gotToprofile(String UID){
 
+
+
+        Intent intent = new Intent(Followersactivity.this, MainActivity.class);
+        intent.putExtra("replaceFragment", true);
+        intent.putExtra("UID",UID);
+        startActivity(intent);
+
+
+
+
+
+    }
 
 
 }

@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="100dp"
         android:layout_marginTop="0dp"
         android:id="@+id/toolbarfavourite"
 
@@ -19,25 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
-            <ImageView
-                android:id="@+id/explorebacjbtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/back"
-                android:layout_centerVertical="true"
 
-
-                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="Notification"
-                android:textSize="25dp"
+                android:textSize="23dp"
                 android:textColor="@color/black"
-
+                android:textStyle="bold"
                 android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/explorebacjbtn"
                 />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>

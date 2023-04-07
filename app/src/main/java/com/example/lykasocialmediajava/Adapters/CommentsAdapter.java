@@ -39,10 +39,14 @@ public class CommentsAdapter extends RecyclerView.Adapter {
 
 private Context context;
 ArrayList<CommentsModel>commentsArrayList;
+Commentactivity commentactivity;
 
-    public CommentsAdapter(Context context, ArrayList<CommentsModel> commentsArrayList) {
+
+    public CommentsAdapter(Context context, ArrayList<CommentsModel> commentsArrayList,Commentactivity commentactivity) {
         this.context = context;
         this.commentsArrayList = commentsArrayList;
+        this.commentactivity=commentactivity;
+
     }
 
     @NonNull
@@ -94,6 +98,12 @@ Log.e("*","afdapter inside"+ details.get("username").toString());
                 }
 
                 }
+        });
+        ((viewmodel)holder).commentimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                commentactivity.gotToprofile(commentsModel.getUserID());
+            }
         });
 
 
