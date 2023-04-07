@@ -99,7 +99,7 @@ public class Likesactivity extends AppCompatActivity {
 
     }
     private void setrecyclerview() {
-        LikesAdapter likesAdapter=new LikesAdapter(getApplicationContext(),Likesarraylist);
+        LikesAdapter likesAdapter=new LikesAdapter(getApplicationContext(),Likesarraylist,Likesactivity.this);
 
 
         recyclerView.setHasFixedSize(true);
@@ -108,6 +108,21 @@ public class Likesactivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(likesAdapter);
+    }
+
+    public void gotToprofile(String UID){
+
+
+
+        Intent intent = new Intent(Likesactivity.this, MainActivity.class);
+        intent.putExtra("replaceFragment", true);
+        intent.putExtra("UID",UID);
+        startActivity(intent);
+
+
+
+
+
     }
 
 }

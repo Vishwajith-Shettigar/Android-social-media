@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lykasocialmediajava.Likesactivity;
 import com.example.lykasocialmediajava.Model.LikesModel;
 import com.example.lykasocialmediajava.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,10 +34,12 @@ public class LikesAdapter extends RecyclerView.Adapter {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
     ArrayList<LikesModel>likesArraylist;
-
-    public LikesAdapter(Context context, ArrayList<LikesModel> likesArraylist) {
+Likesactivity likesactivity;
+    public LikesAdapter(Context context, ArrayList<LikesModel> likesArraylist, Likesactivity likesactivity) {
         this.context = context;
         this.likesArraylist = likesArraylist;
+        this.likesactivity=likesactivity;
+
     }
 
     @NonNull
@@ -89,6 +92,13 @@ public class LikesAdapter extends RecyclerView.Adapter {
             }
         });
 
+
+        ((viewholder)holder).imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                likesactivity.gotToprofile(likesModel.getUserID());
+            }
+        });
 
     }
 
