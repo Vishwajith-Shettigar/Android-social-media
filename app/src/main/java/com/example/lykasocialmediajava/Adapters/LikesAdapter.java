@@ -104,6 +104,7 @@ Likesactivity likesactivity;
 
     @Override
     public int getItemCount() {
+
         return likesArraylist.size();
     }
     public  class  viewholder extends RecyclerView.ViewHolder
