@@ -44,11 +44,12 @@ RecyclerView recyclerView;
     CommentsAdapter commentsAdapter;
     ImageView deletecmt;
 
-ImageView comsend;
+ImageView comsend,commnectbackbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commentactivity);
+        commnectbackbtn=findViewById(R.id.commnectbackbtn);
 
         recyclerView=findViewById(R.id.commentrecycler);
 deletecmt=findViewById(R.id.deletecmt);
@@ -76,7 +77,12 @@ commentsModelArrayList=new ArrayList<>();
 
 
 
-
+        commnectbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 comsend.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {

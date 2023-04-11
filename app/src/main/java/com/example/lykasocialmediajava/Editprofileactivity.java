@@ -45,7 +45,7 @@ String imageAccessToken;
 ProgressBar editprogressbar;
 FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
-    ImageView imageView;
+    ImageView imageView,editproflebackbtn;
     EditText username;
     EditText name;
     EditText desc;
@@ -67,6 +67,7 @@ name=findViewById(R.id.editname);
 desc=findViewById(R.id.editdesc);
 savebtn=findViewById(R.id.editsavebtn);
 
+        editproflebackbtn=findViewById(R.id.editproflebackbtn);
 
 
 username.setText(Usermodel.getUsername());
@@ -83,7 +84,12 @@ if(Usermodel.getImageurl()!=null)
 
 
 
-
+        editproflebackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 imageView.setOnClickListener(new View.OnClickListener() {
     @Override

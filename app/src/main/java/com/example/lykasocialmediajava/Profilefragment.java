@@ -71,7 +71,7 @@ MaterialButton followbtn,messagebtn;
     RecyclerView profilepostrecyclerview;
 
 Searchfargadapter searchfargadapter;
-ImageView profilebookmarkbtn;
+ImageView profilebookmarkbtn,profilenewposticon;
 
     ArrayList<PostModel>bookmarkpost;
 
@@ -94,6 +94,7 @@ Bundle bundle;
 
         profilepostrecyclerview=view.findViewById(R.id.profilepostrecyclerview);
 
+        profilenewposticon=view.findViewById(R.id.profilenewposticon);
 
 
         profilebookmarkbtn=view.findViewById(R.id.profilebookmarkbtn);
@@ -114,7 +115,13 @@ followingsno=view.findViewById(R.id.followingno);
 
 followbtn=view.findViewById(R.id.followbtn);
 
+        profilenewposticon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),Newpostactivity.class).putExtra("isEdit","false"));
 
+            }
+        });
 
             getData();
             getBookmarkData();

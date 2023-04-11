@@ -34,7 +34,7 @@ import java.util.Date;
 public class Globalchat extends AppCompatActivity {
     RecyclerView recyclerView;
     EditText messageedittext;
-    ImageView sendbutton,userimage;
+    ImageView sendbutton,userimage,globalbackbtn;
     Toolbar toolbar;
     TextView username,userstatus;
     String enteredmessage;
@@ -64,6 +64,7 @@ Globalmessagesadapter globalmessagesadapter;
 
         messageedittext=findViewById(R.id.message);
         sendbutton=findViewById(R.id.sendbutn);
+        globalbackbtn=findViewById(R.id.globalbackbtn);
 
 
         recyclerView=findViewById(R.id.globalrecyclerview);
@@ -83,6 +84,13 @@ globalmessagesadapter =new Globalmessagesadapter(this,messagesArrayList);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerView.setAdapter(globalmessagesadapter);
+
+        globalbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

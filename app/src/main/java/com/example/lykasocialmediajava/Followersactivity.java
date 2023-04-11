@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.lykasocialmediajava.Adapters.Searchuseradapter;
 import com.example.lykasocialmediajava.Model.CommentsModel;
@@ -32,13 +34,22 @@ public class Followersactivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
     ArrayList<String>followers;
+    ImageView followersacbackbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followersactivity);
         followerrecycler=findViewById(R.id.followerrecycler);
+        followersacbackbtn=findViewById(R.id.followersacbackbtn);
 
+        followersacbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
 
+            }
+        });
 
         followers=new ArrayList<>();
         searchusermodelArrayList=new ArrayList<>();

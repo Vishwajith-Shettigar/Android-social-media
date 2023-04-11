@@ -42,7 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Newpostactivity extends AppCompatActivity {
-ImageView imageView;
+ImageView imageView,newpostfragbackbtn;
 VideoView videoView;
 
 SwitchMaterial switchanony;
@@ -72,6 +72,7 @@ boolean isAnony=false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newpostactivity);
         switchanony=findViewById(R.id.switchanony);
+        newpostfragbackbtn=findViewById(R.id.newpostfragbackbtn);
 
 
         isEdit="false";
@@ -93,9 +94,16 @@ firebaseFirestore =FirebaseFirestore.getInstance();
 
 // if edit
 
+        newpostfragbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         if(isEdit.equals("true"))
         {
+            switchanony.setVisibility(View.GONE);
             String editimageurl,edittext;
             editimageurl=intent.getStringExtra("postUrl");
             edittext=intent.getStringExtra("text");

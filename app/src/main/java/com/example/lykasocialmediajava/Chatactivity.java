@@ -32,7 +32,7 @@ FirebaseFirestore firebaseFirestore;
 ArrayList<Chatmodel> chatmodels;
 Chatadapter chatadapter;
 
-ImageView globalchatbtn;
+ImageView globalchatbtn,likesbackbtn;
 
     RecyclerView chatsrecycler;
 
@@ -46,6 +46,14 @@ ImageView globalchatbtn;
         chatmodels=new ArrayList<>();
         chatadapter=new Chatadapter(chatmodels,this);
         globalchatbtn=findViewById(R.id.globalchatbtn);
+        likesbackbtn=findViewById(R.id.likesbackbtn);
+
+        likesbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         globalchatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

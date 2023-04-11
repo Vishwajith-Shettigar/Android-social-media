@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Specificchat"
 
-    android:background="#7473BA"
+    android:background="#F4F4F8"
     >
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="0dp"
-        android:background="#FD757BD3"
+        android:background="#FDF9F9F9"
         android:id="@+id/toolbarspecificchat"
 
         >
@@ -41,7 +41,7 @@
                 android:textSize="20dp"
                 android:id="@+id/usernamesc"
 
-                android:textColor="@color/white"
+                android:textColor="@color/black"
 
 
                 />
@@ -147,6 +147,7 @@ android:layout_marginRight="60dp"
         android:textColor="@color/black"
 android:textColorHint="#6F6C6C"
         android:padding="5dp"
+        android:paddingLeft="10dp"
 
 
 
