@@ -499,7 +499,13 @@ Log.e("*",Owner+ "hello---");
             messagebtn.setVisibility(View.GONE);
             usernameprofile.setText(Usermodel.getUsername());
             profilesecnamefullname.setText(Usermodel.getName());
+
             profilebio.setText(Usermodel.getDesc());
+            if(Usermodel.getDesc().equals("null")) {
+
+
+                profilebio.setText("");
+            }
             Picasso.get().load(Uri.parse(Usermodel.getImageurl())).into(userprofilepic);
 
         }
@@ -540,6 +546,11 @@ firebaseFirestore.collection("Following").whereEqualTo("id",FirebaseAuth.getInst
                                 usernameprofile.setText(details.get("username").toString());
                                 profilesecnamefullname.setText(details.get("name").toString());
                                 profilebio.setText(details.get("description").toString());
+                                if(details.get("description").toString().equals("null"))
+                                {
+                                    profilebio.setText("");
+
+                                }
                                 Picasso.get().load(Uri.parse(details.get("imageurl").toString())).into(userprofilepic);
 
 
@@ -624,15 +635,15 @@ Followings.add((String) documentSnapshot1.getData().get("followingID"));
 
     }
 
-    public void goToPostAc(){
+    public void goToPostAc() {
 
         FragmentManager fragmentManager =
-                (getActivity()). getSupportFragmentManager();
+                (getActivity()).getSupportFragmentManager();
 
         Bundle bundle = new Bundle();
 
-        bundle.putParcelableArrayList("arraylist",  postModelArrayList);
-        bundle.putBoolean("isBookmark",false);
+        bundle.putParcelableArrayList("arraylist", postModelArrayList);
+        bundle.putBoolean("isBookmark", false);
 
         Postfragment postfragment = new Postfragment();
         postfragment.setArguments(bundle);
@@ -640,12 +651,7 @@ Followings.add((String) documentSnapshot1.getData().get("followingID"));
                 fragmentManager.beginTransaction();
 
         fragmentTransaction.replace
-                (R.id.fragment_contnair, postfragment).addToBackStack( "tag" ).commit();
-
-
-
-
-
+                (R.id.fragment_contnair, postfragment).addToBackStack("tag").commit();
 
 
     }

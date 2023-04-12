@@ -106,6 +106,8 @@ public class PostAdapter extends RecyclerView.Adapter {
 
         DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         Date cDate;
+        Log.e("#",postModel.getTtime());
+
         try {
              cDate = df.parse(postModel.getTtime());
         } catch (ParseException e) {

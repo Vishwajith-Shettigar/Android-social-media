@@ -77,7 +77,7 @@ Globalmessagesadapter globalmessagesadapter;
 
         messagesArrayList=new ArrayList<>();
 
-globalmessagesadapter =new Globalmessagesadapter(this,messagesArrayList);
+globalmessagesadapter =new Globalmessagesadapter(this,messagesArrayList,Globalchat.this);
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
@@ -151,6 +151,20 @@ globalmessagesadapter =new Globalmessagesadapter(this,messagesArrayList);
 
             }
         });
+
+    }
+    public void gotToprofile(String UID){
+
+
+
+        Intent intent = new Intent(Globalchat.this, MainActivity.class);
+        intent.putExtra("replaceFragment", true);
+        intent.putExtra("UID",UID);
+        startActivity(intent);
+
+
+
+
 
     }
 }

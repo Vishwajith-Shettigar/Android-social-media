@@ -35,7 +35,7 @@ android:iconTint="@color/black"
     <item
 
         android:id="@+id/accountmenu"
-        android:title="Account"
+        android:title="Profile"
         android:enabled="true"
 android:iconTint="@color/black"
 

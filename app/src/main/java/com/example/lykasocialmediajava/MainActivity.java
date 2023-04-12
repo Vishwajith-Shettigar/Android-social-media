@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity   {
             fragmentTransaction.replace
                     (R.id.fragment_contnair, profilefragment).addToBackStack( "tag" ).commit();
 
+
         }else{
 
             FragmentManager fragmentManager =
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity   {
 
                    case R.id.homemenu: {
                        Log.e("*", "indide case");
-                       Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                        FragmentManager fragmentManager =
                                getSupportFragmentManager();
                        FragmentTransaction fragmentTransaction =
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity   {
                        break;
 
                    case R.id.searchmenu: {
-                       Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
                        FragmentManager fragmentManager =
                                getSupportFragmentManager();
                        FragmentTransaction fragmentTransaction =
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity   {
 
                    break;
                    case R.id.favouritemenu: {
-                       Toast.makeText(MainActivity.this, "favaourite", Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(MainActivity.this, "favaourite", Toast.LENGTH_SHORT).show();
                        FragmentManager fragmentManager =
                                getSupportFragmentManager();
                        FragmentTransaction fragmentTransaction =
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity   {
 break;
 
                    case R.id.accountmenu: {
-                       Toast.makeText(MainActivity.this, "account", Toast.LENGTH_SHORT).show();
+//                       Toast.makeText(MainActivity.this, "account", Toast.LENGTH_SHORT).show();
                        FragmentManager fragmentManager =
                                 getSupportFragmentManager();
 

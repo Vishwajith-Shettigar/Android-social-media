@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lykasocialmediajava.Globalchat;
 import com.example.lykasocialmediajava.Model.Globalmessages;
 import com.example.lykasocialmediajava.Model.Messages;
 import com.example.lykasocialmediajava.R;
@@ -34,12 +35,15 @@ FirebaseFirestore firebaseFirestore;
 
     int SENDERITEM=1;
     int RECEIVERITEM=2;
+    Globalchat globalchat;
 
 
-    public Globalmessagesadapter(Context context, ArrayList<Globalmessages> messagesArrayList) {
+    public Globalmessagesadapter(Context context, ArrayList<Globalmessages> messagesArrayList, Globalchat globalchat) {
         this.context = context;
         this.messagesArrayList = messagesArrayList;
         firebaseFirestore =FirebaseFirestore.getInstance();
+        this.globalchat=globalchat;
+
 
     }
 
@@ -102,13 +106,24 @@ if(task.isSuccessful())
         ((SenderViewholder) holder).username.setText(details.get("username").toString());
         Picasso.get().load(details.get("imageurl").toString()).into( ((SenderViewholder) holder).imageView);
 
-
+        ((SenderViewholder) holder).imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                globalchat.gotToprofile(messages.getSenderUID());
+            }
+        });
     }
     else{
 
         ((ReceiverViewholder) holder).username.setText(details.get("username").toString());
         Picasso.get().load(details.get("imageurl").toString()).into( ((ReceiverViewholder) holder).imageView);
 
+        ((ReceiverViewholder) holder).imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                globalchat.gotToprofile(messages.getSenderUID());
+            }
+        });
     }
 
 }
