@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text=" sssssssssssssssssssssssssssssssssssssssssssssssssssssswsqdqdqwdqdeh"
 
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="@color/white"
             android:paddingLeft="35dp"
             android:paddingRight="25dp"
