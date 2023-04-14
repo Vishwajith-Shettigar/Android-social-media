@@ -16,6 +16,8 @@ import com.example.lykasocialmediajava.Adapters.Searchuseradapter;
 import com.example.lykasocialmediajava.Model.CommentsModel;
 import com.example.lykasocialmediajava.Model.Getmaincontext;
 import com.example.lykasocialmediajava.Model.Searchusermodel;
+import com.example.lykasocialmediajava.Model.userApi;
+import com.example.lykasocialmediajava.Model.userApiInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +29,16 @@ import org.checkerframework.checker.guieffect.qual.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Innersearchactivity extends AppCompatActivity {
     RecyclerView searchinnerrecycler;
@@ -35,7 +46,7 @@ public class Innersearchactivity extends AppCompatActivity {
 ArrayList<Searchusermodel> searchusermodelArrayList;
 FirebaseFirestore firebaseFirestore;
 FirebaseAuth firebaseAuth;
-
+    userApi userapi;
 String searchUsername;
 
     @Override
@@ -49,6 +60,21 @@ String searchUsername;
         innersearch=findViewById(R.id.innersearch);
 
         searchinnerrecycler=findViewById(R.id.searchinnerrecycler);
+
+        HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient= new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .build();
+        Retrofit retrofit= new Retrofit.Builder()
+                .baseUrl("http://192.168.43.214:5000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+
+         userapi = retrofit.create(com.example.lykasocialmediajava.Model.userApi.class);
 
         innersearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -76,6 +102,27 @@ String searchUsername;
     }
     public  void getData()
     {
+//        Log.e("$","get data");
+//
+//        Call<List<userApiInfo>> call=userapi.apigetUsers(searchUsername);
+//          call.enqueue(new Callback<List<userApiInfo>>() {
+//              @Override
+//              public void onResponse(Call<List<userApiInfo>> call, Response<List<userApiInfo>> response) {
+//                  if(!response.isSuccessful())
+//                  {
+//                      return;
+//                  }
+//              }
+//
+//              @Override
+//              public void onFailure(Call<List<userApiInfo>> call, Throwable t) {
+//Log.e("$","fail");
+//              }
+//          });
+//
+//
+//
+//
 
 
         firebaseFirestore.collection("users").whereEqualTo("username",searchUsername)
@@ -100,15 +147,15 @@ String searchUsername;
                                 Searchusermodel searchusermodel =new Searchusermodel(
                                         details.get("userID").toString(),
                                         details.get("username").toString(),
-                                details.get("name").toString(),
-                                details.get("imageurl").toString()
+                                        details.get("name").toString(),
+                                        details.get("imageurl").toString()
 
 
 
 
                                 );
 
-                               searchusermodelArrayList .add(searchusermodel);
+                                searchusermodelArrayList .add(searchusermodel);
 
                                 setrecyclerview();
 
@@ -121,7 +168,6 @@ String searchUsername;
 
                     }
                 });
-
 
     }
     private void setrecyclerview() {
