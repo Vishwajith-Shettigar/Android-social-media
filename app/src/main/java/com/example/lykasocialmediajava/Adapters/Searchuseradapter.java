@@ -2,6 +2,7 @@ package com.example.lykasocialmediajava.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class Searchuseradapter extends RecyclerView.Adapter {
         Searchusermodel searchuser=Arraysearchusermodels.get(position);
 
         Picasso.get().load(Uri.parse(searchuser.getUserImage())).into(((viewholder)holder).userimagesearch);
-
+Log.e("#","image --"+searchuser.getUserImage()+"");
         ((viewholder)holder).searchusername.setText(searchuser.getUsername());
 
         ((viewholder)holder).searchname.setText(searchuser.getName());

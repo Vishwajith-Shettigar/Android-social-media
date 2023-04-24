@@ -16,16 +16,16 @@ public interface userApi {
 
 
 @POST("saveUser")
-Call<userApiInfo> apisaveUser(@Body userApiInfo userApiInfo);
+Call<Searchusermodel> apisaveUser(@Body Searchusermodel userApiInfo);
 
-    @GET("/getUser1")
-    Call<List<userApiInfo>> apigetUsers(@Query("text") String text);
+    @GET("getUser1")
+    Call<List<Searchusermodel>> apigetUsers(@Query("text") String text);
 
 
 
 
     @POST("updateuser")
-    Call<userApiInfo> apiupdateuser(@Body userApiInfo userApiInfo);
+    Call<Searchusermodel> apiupdateuser(@Body Searchusermodel userApiInfo);
 
 
 

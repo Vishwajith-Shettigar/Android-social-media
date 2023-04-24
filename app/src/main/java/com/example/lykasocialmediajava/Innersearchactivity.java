@@ -102,72 +102,88 @@ String searchUsername;
     }
     public  void getData()
     {
-//        Log.e("$","get data");
+        Log.e("$","get data");
+
+        Call<List<Searchusermodel>> call=userapi.apigetUsers(searchUsername);
+
+          call.enqueue(new Callback<List<Searchusermodel>>() {
+              @Override
+              public void onResponse(Call<List<Searchusermodel>> call, Response<List<Searchusermodel>> response) {
+                  if(!response.isSuccessful())
+                  {
+                      Log.e("#","not success");
+                      return;
+                  }
+
+                  Log.e("#","success");
+
+                  searchusermodelArrayList= (ArrayList<Searchusermodel>) response.body();
+setrecyclerview();
+
+                  List<Searchusermodel>se=response.body();
+                  Log.e("#",se.get(0).getUserID());
+                  Log.e("#",se.get(0).getUsername());
+                  Log.e("#",se.get(0).getUserImage());
+                  Log.e("#",se.get(0).getName());
+
+
+              }
+
+              @Override
+              public void onFailure(Call<List<Searchusermodel>> call, Throwable t) {
+Log.e("#","fail"+ t.toString());
+
+              }
+          });
 //
-//        Call<List<userApiInfo>> call=userapi.apigetUsers(searchUsername);
-//          call.enqueue(new Callback<List<userApiInfo>>() {
-//              @Override
-//              public void onResponse(Call<List<userApiInfo>> call, Response<List<userApiInfo>> response) {
-//                  if(!response.isSuccessful())
-//                  {
-//                      return;
-//                  }
-//              }
-//
-//              @Override
-//              public void onFailure(Call<List<userApiInfo>> call, Throwable t) {
-//Log.e("$","fail");
-//              }
-//          });
-//
-//
-//
 //
 
 
-        firebaseFirestore.collection("users").whereEqualTo("username",searchUsername)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                        Log.e("&"," got it");
-                        if(task.isSuccessful())
-                        {
-
-                            QuerySnapshot querySnapshot=task.getResult();
-                            ArrayList<DocumentSnapshot>documentSnapshotArrayList= (ArrayList<DocumentSnapshot>) querySnapshot.getDocuments();
-                            Log.e("&"," inside task");
-                            CommentsModel commentsModel;
-                            Log.e("&",task.getResult().size()+"--  ");
-                            for (int i=0;i<task.getResult().size();i++)
-                            {
-                                Map<String,Object> details=new HashMap<>();
-                                DocumentSnapshot documentSnapshot=documentSnapshotArrayList.get(i);
-                                details=documentSnapshot.getData();
-                                Searchusermodel searchusermodel =new Searchusermodel(
-                                        details.get("userID").toString(),
-                                        details.get("username").toString(),
-                                        details.get("name").toString(),
-                                        details.get("imageurl").toString()
 
 
-
-
-                                );
-
-                                searchusermodelArrayList .add(searchusermodel);
-
-                                setrecyclerview();
-
-
-                            }
-
-
-
-                        }
-
-                    }
-                });
+//        firebaseFirestore.collection("users").whereEqualTo("username",searchUsername)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//
+//                        Log.e("&"," got it");
+//                        if(task.isSuccessful())
+//                        {
+//
+//                            QuerySnapshot querySnapshot=task.getResult();
+//                            ArrayList<DocumentSnapshot>documentSnapshotArrayList= (ArrayList<DocumentSnapshot>) querySnapshot.getDocuments();
+//                            Log.e("&"," inside task");
+//                            CommentsModel commentsModel;
+//                            Log.e("&",task.getResult().size()+"--  ");
+//                            for (int i=0;i<task.getResult().size();i++)
+//                            {
+//                                Map<String,Object> details=new HashMap<>();
+//                                DocumentSnapshot documentSnapshot=documentSnapshotArrayList.get(i);
+//                                details=documentSnapshot.getData();
+//                                Searchusermodel searchusermodel =new Searchusermodel(
+//                                        details.get("userID").toString(),
+//                                        details.get("username").toString(),
+//                                        details.get("name").toString(),
+//                                        details.get("imageurl").toString()
+//
+//
+//
+//
+//                                );
+//
+//                                searchusermodelArrayList .add(searchusermodel);
+//
+//                                setrecyclerview();
+//
+//
+//                            }
+//
+//
+//
+//                        }
+//
+//                    }
+//                });
 
     }
     private void setrecyclerview() {
