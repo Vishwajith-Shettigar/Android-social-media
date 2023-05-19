@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.lykasocialmediajava.Model.Searchusermodel;
+import com.example.lykasocialmediajava.Model.userApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +41,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class Editprofileactivity extends AppCompatActivity {
 
 String imageAccessToken;
@@ -50,6 +60,7 @@ FirebaseAuth firebaseAuth;
     EditText name;
     EditText desc;
     Uri imagepath=null;
+    userApi userapi;
     static boolean savable=false;
 static int PICK_IMAGE=123;
 MaterialButton savebtn;
@@ -73,7 +84,27 @@ savebtn=findViewById(R.id.editsavebtn);
 username.setText(Usermodel.getUsername());
 name.setText(Usermodel.getName());
 desc.setText(Usermodel.getDesc());
-if(Usermodel.getImageurl()!=null)
+
+
+
+        HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient= new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .build();
+        Retrofit retrofit= new Retrofit.Builder()
+                .baseUrl("http://192.168.43.214:5000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+         userapi = retrofit.create(com.example.lykasocialmediajava.Model.userApi.class);
+
+
+
+
+        if(Usermodel.getImageurl()!=null)
 {
 
     Picasso.get().load(Usermodel.getImageurl()).into(imageView);
@@ -264,6 +295,47 @@ if(imagepath!=null)
     documentReference.update("imageurl",imageAccessToken);
 }
 
+
+
+
+        Searchusermodel searchusermodel;
+
+        // updating in  node server
+        if(imagepath!=null) {
+             searchusermodel = new Searchusermodel(firebaseAuth.getUid(),
+                    username.getText().toString(), name.getText().toString(),
+
+                    imageAccessToken
+            );
+        }
+        else{
+            searchusermodel = new Searchusermodel(firebaseAuth.getUid(),
+                    username.getText().toString(), name.getText().toString(),
+
+                    Usermodel.getImageurl()
+            );
+        }
+
+        Call<Searchusermodel> call=userapi.apiupdateuser(searchusermodel);
+        Log.e("*","mongo dave here");
+
+        call.enqueue(new Callback<Searchusermodel>() {
+            @Override
+            public void onResponse(Call<Searchusermodel> call, Response<Searchusermodel> response) {
+
+                if(response.isSuccessful())
+                {
+                    Log.e("*","upadet success");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Searchusermodel> call, Throwable t) {
+                Log.e("*","failure update profile in with node server"+ t.toString());
+
+
+            }
+        });
 
 
 

@@ -16,7 +16,7 @@ public interface userApi {
 
 
 @POST("saveUser")
-Call<Searchusermodel> apisaveUser(@Body Searchusermodel userApiInfo);
+Call<Searchusermodel> apisaveUser(@Body Searchusermodel searchusermodel);
 
     @GET("getUser1")
     Call<List<Searchusermodel>> apigetUsers(@Query("text") String text);
@@ -25,7 +25,7 @@ Call<Searchusermodel> apisaveUser(@Body Searchusermodel userApiInfo);
 
 
     @POST("updateuser")
-    Call<Searchusermodel> apiupdateuser(@Body Searchusermodel userApiInfo);
+    Call<Searchusermodel> apiupdateuser(@Body Searchusermodel searchusermodel);
 
 
 

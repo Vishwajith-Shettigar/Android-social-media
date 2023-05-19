@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "81516958438",
-    "project_id": "lykasocialmedia",
-    "storage_bucket": "lykasocialmedia.appspot.com"
+    "project_number": "293043630648",
+    "project_id": "lykasocialmedia-9cb93",
+    "storage_bucket": "lykasocialmedia-9cb93.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:81516958438:android:388c051143cb22466f6127",
+        "mobilesdk_app_id": "1:293043630648:android:3e2efe4283065040d56ccd",
         "android_client_info": {
           "package_name": "com.example.lykasocialmediajava"
         }
       },
       "oauth_client": [
         {
-          "client_id": "81516958438-ihm9j4g2heqcvbt7sgldc1a01uip6vij.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.lykasocialmediajava",
-            "certificate_hash": "10951142f3a55ad0c0391962f5c6c98f26ee1177"
-          }
-        },
-        {
-          "client_id": "81516958438-imdaua8t21jo8jt85te5l6tml9nf9abl.apps.googleusercontent.com",
+          "client_id": "293043630648-g26o0n00krt68tc8q5sfn8sl4obdbtsm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDOWxRsOzMbEUdNOb7EvmHKIpz5O2NqszA"
+          "current_key": "AIzaSyAdlva6_FA33uaA16noX_5UCM9m4SA0yUI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "81516958438-imdaua8t21jo8jt85te5l6tml9nf9abl.apps.googleusercontent.com",
+              "client_id": "293043630648-g26o0n00krt68tc8q5sfn8sl4obdbtsm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lykasocialmediajava.Model.Searchusermodel;
+import com.example.lykasocialmediajava.Model.userApi;
+import com.example.lykasocialmediajava.Model.userApiInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +32,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class Signupactivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
@@ -42,6 +53,7 @@ public class Signupactivity extends AppCompatActivity {
 
 MaterialButton signupbtn;
 String username,email,password;
+userApi userapi;
 
 
     @Override
@@ -61,9 +73,23 @@ String username,email,password;
 signupbtn=findViewById(R.id.signupbtn);
 
 
+        HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient= new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .build();
+        Retrofit retrofit= new Retrofit.Builder()
+                .baseUrl("http://192.168.43.214:5000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+        userapi = retrofit.create(com.example.lykasocialmediajava.Model.userApi.class);
 
 
-signupbtn.setOnClickListener(new View.OnClickListener() {
+
+        signupbtn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         username=usernameedittext.getText().toString().trim();
@@ -101,7 +127,7 @@ usernameres.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() 
     @Override
     public void onComplete(@NonNull Task<QuerySnapshot> task) {
         if(task.isSuccessful()) {
-
+            Log.e("*","entered");
 
             if(task.getResult().size()!=0)
             {
@@ -152,7 +178,29 @@ if(password.length()<=5)
 
                                             collectionReference.document(firebaseAuth.getUid()).set(details);
 
+                                        Searchusermodel searchusermodel=new Searchusermodel(firebaseAuth.getUid(),
+                                                username,username,"null");
 
+                                        Call<Searchusermodel>call=userapi.apisaveUser(searchusermodel);
+                                        Log.e("*","mongo dave here");
+
+                                        call.enqueue(new Callback<Searchusermodel>() {
+                                            @Override
+                                            public void onResponse(Call<Searchusermodel> call, Response<Searchusermodel> response) {
+
+                                                if(response.isSuccessful())
+                                                {
+                                                    Log.e("*","success sign in with node server");
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Searchusermodel> call, Throwable t) {
+                                                Log.e("*","failure sign in with node server"+ t.toString());
+
+
+                                            }
+                                        });
 
                                         Intent intent=new Intent(Signupactivity.this,MainActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
