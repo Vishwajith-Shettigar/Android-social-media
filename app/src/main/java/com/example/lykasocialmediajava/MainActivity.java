@@ -65,8 +65,7 @@ public class MainActivity extends AppCompatActivity   {
         boolean replaceFragment = getIntent().getBooleanExtra("replaceFragment", false);
 
         if (replaceFragment) {
-            Log.e("*","we are dumb");
-            Log.e("*","we are dumb");
+
             FragmentManager fragmentManager =
                     getSupportFragmentManager();
 

@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.lykasocialmediajava.Adapters.CommentsAdapter;
 import com.example.lykasocialmediajava.Adapters.LikesAdapter;
@@ -34,7 +36,7 @@ public class Likesactivity extends AppCompatActivity {
 
     String post_ID;
     ArrayList<LikesModel> Likesarraylist;
-
+ImageView likesbackbtn;
     RecyclerView recyclerView;
 
     @Override
@@ -42,10 +44,18 @@ public class Likesactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_likesactivity);
         ArrayList<LikesModel> Likesarraylist;
+        likesbackbtn=findViewById(R.id.likesbackbtn);
+
         Intent intent = getIntent();
         post_ID=intent.getStringExtra("postID");
         recyclerView=findViewById(R.id.likesrecyclerview);
         getLikes();
+        likesbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
     }

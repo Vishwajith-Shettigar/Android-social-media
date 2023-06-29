@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lykasocialmediajava.Adapters.PostAdapter;
@@ -29,7 +30,7 @@ public class Postfragment extends Fragment {
 RecyclerView postfragrecyclerview;
 Bundle bundle;
 TextView toolbartext;
-
+ImageView postfragbackbtn;
 ArrayList<PostModel> arrayList;
 boolean isBookmark=false;
 
@@ -48,11 +49,19 @@ arrayList=new ArrayList<>();
 
         arrayList=bundle.getParcelableArrayList("arraylist");
         isBookmark=bundle.getBoolean("isBookmark");
-
+        postfragbackbtn=view.findViewById(R.id.postfragbackbtn);
 
         toolbartext=view.findViewById(R.id.toolbartext);
 
+        postfragbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+
+
+
+            }
+        });
         if(isBookmark)
         {
             toolbartext.setText("Bookmark");
