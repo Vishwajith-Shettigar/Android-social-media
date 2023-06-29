@@ -128,7 +128,7 @@ usernameres.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() 
     public void onComplete(@NonNull Task<QuerySnapshot> task) {
         if(task.isSuccessful()) {
             Log.e("*","entered");
-
+Log.e("*",task.getResult().size()+"");
             if(task.getResult().size()!=0)
             {
 Log.e("*","already exists");

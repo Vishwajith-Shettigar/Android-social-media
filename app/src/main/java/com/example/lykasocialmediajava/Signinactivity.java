@@ -81,7 +81,7 @@ public class Signinactivity extends AppCompatActivity {
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("*", "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(Signinactivity.this, "Wrong details",
+                                    Toast.makeText(Signinactivity.this, "Account doesnot exists",
                                             Toast.LENGTH_SHORT).show();
 
                                 }

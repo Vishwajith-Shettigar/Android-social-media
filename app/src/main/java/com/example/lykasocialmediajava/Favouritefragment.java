@@ -91,8 +91,11 @@ firebaseFirestore=FirebaseFirestore.getInstance();
 
                                         );
                                 notimodel.setSeen((Boolean) details.get("seen"));
+                               if(! details.get("fromUserid").toString().equals(firebaseAuth.getUid()))
+                               {
+                                   notimodelArrayList.add(notimodel);
 
-notimodelArrayList.add(notimodel);
+                               }
                                 DocumentReference documentReference=FirebaseFirestore.getInstance().collection("Notification")
                                         .document(details.get("notiID").toString());
                                 documentReference.update("seen",true);

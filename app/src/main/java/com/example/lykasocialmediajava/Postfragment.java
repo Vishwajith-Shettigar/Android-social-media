@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.lykasocialmediajava.Adapters.PostAdapter;
 import com.example.lykasocialmediajava.Model.PostModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
@@ -84,7 +85,13 @@ arrayList=new ArrayList<>();
 
         Bundle bundle = new Bundle();
 
-        bundle.putBoolean("owner",  false);
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+        if(UID.equals(firebaseAuth.getUid())) {
+            bundle.putBoolean("owner", true);
+        }else{
+            bundle.putBoolean("owner", false);
+
+        }
         bundle.putString("userID",UID);
 
 

@@ -189,8 +189,12 @@ QuerySnapshot querySnapshot=task.getResult();
                 (getActivity()). getSupportFragmentManager();
 
         Bundle bundle = new Bundle();
+if(UID.equals(firebaseAuth.getUid())) {
+    bundle.putBoolean("owner", true);
+}else{
+    bundle.putBoolean("owner", false);
 
-        bundle.putBoolean("owner",  false);
+}
         bundle.putString("userID",UID);
 
 
