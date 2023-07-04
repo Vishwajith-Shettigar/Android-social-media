@@ -58,6 +58,7 @@ public class Profilefragment extends Fragment {
 ArrayList<PostModel>postModelArrayList;
 
     FirebaseAuth firebaseAuth;
+    Map<String,Object>postdetails;
     FirebaseFirestore firebaseFirestore;
     String UID;
     ArrayList<String>Followings=new ArrayList<>();
@@ -350,39 +351,47 @@ followbtn.setOnClickListener(new View.OnClickListener() {
 
                                                 if(task.isSuccessful())
                                                 {
-
-                                                    Map<String,Object>postdetails=task.getResult().getDocuments().get(0).getData();
-
-                                                    FirebaseFirestore.getInstance().collection("users").whereEqualTo("userID",postdetails.get("userID").toString())
-                                                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-
-                                                                    if(task.isSuccessful())
-                                                                    {
-
-                                                                        Map<String,Object>user=task.getResult().getDocuments().get(0).getData();
-
-                                                                        PostModel postModel=new PostModel(user.get("userID").toString(),user.get("username").toString(),user.get("imageurl").toString(),postdetails.get("post_id").toString(),
-
-                                                                                postdetails.get("postimage").toString(),postdetails.get("posttext").toString(),
-
-                                                                                postdetails.get("timetsamp").toString(),
-                                                                                (boolean)postdetails.get("hideLike"),(boolean)postdetails.get("hidecomt"),
-                                                                                (boolean)postdetails.get("isAnony")
+                                                   postdetails=new HashMap<>();
+try{
+ postdetails=task.getResult().getDocuments().get(0).getData();
+    FirebaseFirestore.getInstance().collection("users").whereEqualTo("userID",postdetails.get("userID").toString())
+            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
 
-                                                                        );
+                    if(task.isSuccessful())
+                    {
 
-                                                                        bookmarkpost.add(postModel);
-                                                                        Log.e("*","hiiiiiiii--------------- booikmark"+postModel.getPtext());
-                                                                        Log.e("*","hiiiiiiii--------------- booikmark-->"+ bookmarkpost.size());
+                        Map<String,Object>user=task.getResult().getDocuments().get(0).getData();
 
-                                                                    }
+                        PostModel postModel=new PostModel(user.get("userID").toString(),user.get("username").toString(),user.get("imageurl").toString(),postdetails.get("post_id").toString(),
 
-                                                                }
-                                                            });
+                                postdetails.get("postimage").toString(),postdetails.get("posttext").toString(),
+
+                                postdetails.get("timetsamp").toString(),
+                                (boolean)postdetails.get("hideLike"),(boolean)postdetails.get("hidecomt"),
+                                (boolean)postdetails.get("isAnony")
+
+
+                        );
+
+                        bookmarkpost.add(postModel);
+                        Log.e("*","hiiiiiiii--------------- booikmark"+postModel.getPtext());
+                        Log.e("*","hiiiiiiii--------------- booikmark-->"+ bookmarkpost.size());
+
+                    }
+
+                }
+            });
+
+}
+catch (Exception e)
+{
+
+}
+
+
 
 
                                                 }

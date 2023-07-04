@@ -121,10 +121,6 @@ String searchUsername;
 setrecyclerview();
 
                   List<Searchusermodel>se=response.body();
-                  Log.e("#",se.get(0).getUserID());
-                  Log.e("#",se.get(0).getUsername());
-                  Log.e("#",se.get(0).getUserImage());
-                  Log.e("#",se.get(0).getName());
 
 
               }
