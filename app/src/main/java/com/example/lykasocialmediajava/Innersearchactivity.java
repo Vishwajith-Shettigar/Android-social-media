@@ -68,8 +68,7 @@ String searchUsername;
                 .addInterceptor(httpLoggingInterceptor)
                 .build();
         Retrofit retrofit= new Retrofit.Builder()
-//                .baseUrl("http://192.168.43.214:5000")
-                .baseUrl("https://x5572n4ypa.execute-api.ap-southeast-2.amazonaws.com")
+                .baseUrl("url")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
